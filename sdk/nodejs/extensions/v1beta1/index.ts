@@ -2,16 +2,6 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 // Export members:
-export * from "./DaemonSet";
-export * from "./DaemonSetList";
-export * from "./Deployment";
-export * from "./DeploymentList";
 export * from "./Ingress";
 export * from "./IngressList";
-export * from "./NetworkPolicy";
-export * from "./NetworkPolicyList";
-export * from "./PodSecurityPolicy";
-export * from "./PodSecurityPolicyList";
-export * from "./ReplicaSet";
-export * from "./ReplicaSetList";
 

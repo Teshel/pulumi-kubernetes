@@ -342,102 +342,6 @@ def _parse_yaml_object(
         return [identifier.apply(
             lambda x: (f"apps/v1/StatefulSetList:{x}",
                        StatefulSetList(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta1/ControllerRevision":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta1 import ControllerRevision
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta1/ControllerRevision:{x}",
-                       ControllerRevision(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta1/ControllerRevisionList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta1 import ControllerRevisionList
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta1/ControllerRevisionList:{x}",
-                       ControllerRevisionList(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta1/Deployment":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta1 import Deployment
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta1/Deployment:{x}",
-                       Deployment(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta1/DeploymentList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta1 import DeploymentList
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta1/DeploymentList:{x}",
-                       DeploymentList(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta1/StatefulSet":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta1 import StatefulSet
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta1/StatefulSet:{x}",
-                       StatefulSet(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta1/StatefulSetList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta1 import StatefulSetList
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta1/StatefulSetList:{x}",
-                       StatefulSetList(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta2/ControllerRevision":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta2 import ControllerRevision
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta2/ControllerRevision:{x}",
-                       ControllerRevision(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta2/ControllerRevisionList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta2 import ControllerRevisionList
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta2/ControllerRevisionList:{x}",
-                       ControllerRevisionList(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta2/DaemonSet":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta2 import DaemonSet
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta2/DaemonSet:{x}",
-                       DaemonSet(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta2/DaemonSetList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta2 import DaemonSetList
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta2/DaemonSetList:{x}",
-                       DaemonSetList(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta2/Deployment":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta2 import Deployment
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta2/Deployment:{x}",
-                       Deployment(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta2/DeploymentList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta2 import DeploymentList
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta2/DeploymentList:{x}",
-                       DeploymentList(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta2/ReplicaSet":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta2 import ReplicaSet
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta2/ReplicaSet:{x}",
-                       ReplicaSet(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta2/ReplicaSetList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta2 import ReplicaSetList
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta2/ReplicaSetList:{x}",
-                       ReplicaSetList(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta2/StatefulSet":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta2 import StatefulSet
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta2/StatefulSet:{x}",
-                       StatefulSet(f"{x}", opts, **obj)))]
-    if gvk == "apps/v1beta2/StatefulSetList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.apps.v1beta2 import StatefulSetList
-        return [identifier.apply(
-            lambda x: (f"apps/v1beta2/StatefulSetList:{x}",
-                       StatefulSetList(f"{x}", opts, **obj)))]
     if gvk == "auditregistration.k8s.io/v1alpha1/AuditSink":
         # Import locally to avoid name collisions.
         from pulumi_kubernetes.auditregistration.v1alpha1 import AuditSink
@@ -846,30 +750,6 @@ def _parse_yaml_object(
         return [identifier.apply(
             lambda x: (f"events.k8s.io/v1beta1/EventList:{x}",
                        EventList(f"{x}", opts, **obj)))]
-    if gvk == "extensions/v1beta1/DaemonSet":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.extensions.v1beta1 import DaemonSet
-        return [identifier.apply(
-            lambda x: (f"extensions/v1beta1/DaemonSet:{x}",
-                       DaemonSet(f"{x}", opts, **obj)))]
-    if gvk == "extensions/v1beta1/DaemonSetList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.extensions.v1beta1 import DaemonSetList
-        return [identifier.apply(
-            lambda x: (f"extensions/v1beta1/DaemonSetList:{x}",
-                       DaemonSetList(f"{x}", opts, **obj)))]
-    if gvk == "extensions/v1beta1/Deployment":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.extensions.v1beta1 import Deployment
-        return [identifier.apply(
-            lambda x: (f"extensions/v1beta1/Deployment:{x}",
-                       Deployment(f"{x}", opts, **obj)))]
-    if gvk == "extensions/v1beta1/DeploymentList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.extensions.v1beta1 import DeploymentList
-        return [identifier.apply(
-            lambda x: (f"extensions/v1beta1/DeploymentList:{x}",
-                       DeploymentList(f"{x}", opts, **obj)))]
     if gvk == "extensions/v1beta1/Ingress":
         # Import locally to avoid name collisions.
         from pulumi_kubernetes.extensions.v1beta1 import Ingress
@@ -882,42 +762,6 @@ def _parse_yaml_object(
         return [identifier.apply(
             lambda x: (f"extensions/v1beta1/IngressList:{x}",
                        IngressList(f"{x}", opts, **obj)))]
-    if gvk == "extensions/v1beta1/NetworkPolicy":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.extensions.v1beta1 import NetworkPolicy
-        return [identifier.apply(
-            lambda x: (f"extensions/v1beta1/NetworkPolicy:{x}",
-                       NetworkPolicy(f"{x}", opts, **obj)))]
-    if gvk == "extensions/v1beta1/NetworkPolicyList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.extensions.v1beta1 import NetworkPolicyList
-        return [identifier.apply(
-            lambda x: (f"extensions/v1beta1/NetworkPolicyList:{x}",
-                       NetworkPolicyList(f"{x}", opts, **obj)))]
-    if gvk == "extensions/v1beta1/PodSecurityPolicy":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.extensions.v1beta1 import PodSecurityPolicy
-        return [identifier.apply(
-            lambda x: (f"extensions/v1beta1/PodSecurityPolicy:{x}",
-                       PodSecurityPolicy(f"{x}", opts, **obj)))]
-    if gvk == "extensions/v1beta1/PodSecurityPolicyList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.extensions.v1beta1 import PodSecurityPolicyList
-        return [identifier.apply(
-            lambda x: (f"extensions/v1beta1/PodSecurityPolicyList:{x}",
-                       PodSecurityPolicyList(f"{x}", opts, **obj)))]
-    if gvk == "extensions/v1beta1/ReplicaSet":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.extensions.v1beta1 import ReplicaSet
-        return [identifier.apply(
-            lambda x: (f"extensions/v1beta1/ReplicaSet:{x}",
-                       ReplicaSet(f"{x}", opts, **obj)))]
-    if gvk == "extensions/v1beta1/ReplicaSetList":
-        # Import locally to avoid name collisions.
-        from pulumi_kubernetes.extensions.v1beta1 import ReplicaSetList
-        return [identifier.apply(
-            lambda x: (f"extensions/v1beta1/ReplicaSetList:{x}",
-                       ReplicaSetList(f"{x}", opts, **obj)))]
     if gvk == "flowcontrol.apiserver.k8s.io/v1alpha1/FlowSchema":
         # Import locally to avoid name collisions.
         from pulumi_kubernetes.flowcontrol.v1alpha1 import FlowSchema

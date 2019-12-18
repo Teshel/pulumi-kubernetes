@@ -686,7 +686,7 @@ export namespace admissionregistration {
       readonly rules: admissionregistration.v1beta1.RuleWithOperations[]
 
       /**
-       * SideEffects states whether this webhookk has side effects. Acceptable values are: Unknown,
+       * SideEffects states whether this webhook has side effects. Acceptable values are: Unknown,
        * None, Some, NoneOnDryRun Webhooks with side effects MUST implement a reconciliation system,
        * since a request may be rejected by a future step in the admission change and the side
        * effects therefore need to be undone. Requests with the dryRun attribute will be
@@ -964,7 +964,7 @@ export namespace admissionregistration {
       readonly rules: admissionregistration.v1beta1.RuleWithOperations[]
 
       /**
-       * SideEffects states whether this webhookk has side effects. Acceptable values are: Unknown,
+       * SideEffects states whether this webhook has side effects. Acceptable values are: Unknown,
        * None, Some, NoneOnDryRun Webhooks with side effects MUST implement a reconciliation system,
        * since a request may be rejected by a future step in the admission change and the side
        * effects therefore need to be undone. Requests with the dryRun attribute will be
@@ -1559,7 +1559,37 @@ export namespace apiextensions {
       
       readonly externalDocs: apiextensions.v1.ExternalDocumentation
 
-      
+      /**
+       * format is an OpenAPI v3 format string. Unknown formats are ignored. The following formats
+       * are validated:
+       * 
+       * - bsonobjectid: a bson object ID, i.e. a 24 characters hex string - uri: an URI as parsed
+       * by Golang net/url.ParseRequestURI - email: an email address as parsed by Golang
+       * net/mail.ParseAddress - hostname: a valid representation for an Internet host name, as
+       * defined by RFC 1034, section 3.1 [RFC1034]. - ipv4: an IPv4 IP as parsed by Golang
+       * net.ParseIP - ipv6: an IPv6 IP as parsed by Golang net.ParseIP - cidr: a CIDR as parsed by
+       * Golang net.ParseCIDR - mac: a MAC address as parsed by Golang net.ParseMAC - uuid: an UUID
+       * that allows uppercase defined by the regex
+       * (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$ - uuid3: an UUID3
+       * that allows uppercase defined by the regex
+       * (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?3[0-9a-f]{3}-?[0-9a-f]{4}-?[0-9a-f]{12}$ - uuid4: an UUID4
+       * that allows uppercase defined by the regex
+       * (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?4[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12}$ - uuid5: an
+       * UUID5 that allows uppercase defined by the regex
+       * (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?5[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12}$ - isbn: an
+       * ISBN10 or ISBN13 number string like "0321751043" or "978-0321751041" - isbn10: an ISBN10
+       * number string like "0321751043" - isbn13: an ISBN13 number string like "978-0321751041" -
+       * creditcard: a credit card number defined by the regex
+       * ^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$
+       * with any non digit characters mixed in - ssn: a U.S. social security number following the
+       * regex ^\d{3}[- ]?\d{2}[- ]?\d{4}$ - hexcolor: an hexadecimal color code like "#FFFFFF:
+       * following the regex ^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$ - rgbcolor: an RGB color code like
+       * rgb like "rgb(255,255,2559" - byte: base64 encoded binary data - password: any kind of
+       * string - date: a date string like "2006-01-02" as defined by full-date in RFC3339 -
+       * duration: a duration string like "22 ns" as parsed by Golang time.ParseDuration or
+       * compatible with Scala duration format - datetime: a date time string like
+       * "2014-12-15T19:30:20.000Z" as defined by date-time in RFC3339.
+       */
       readonly format: string
 
       
@@ -1669,7 +1699,8 @@ export namespace apiextensions {
        *      may be used on any type of list (struct, scalar, ...).
        * 2) `set`:
        *      Sets are lists that must not have multiple items with the same value. Each
-       *      value must be a scalar (or another atomic type).
+       *      value must be a scalar, an object with x-kubernetes-map-type `atomic` or an
+       *      array with x-kubernetes-list-type `atomic`.
        * 3) `map`:
        *      These lists are like maps in that their elements have a non-index key
        *      used to identify them. Order is preserved upon merge. The map tag
@@ -2307,7 +2338,37 @@ export namespace apiextensions {
       
       readonly externalDocs: apiextensions.v1beta1.ExternalDocumentation
 
-      
+      /**
+       * format is an OpenAPI v3 format string. Unknown formats are ignored. The following formats
+       * are validated:
+       * 
+       * - bsonobjectid: a bson object ID, i.e. a 24 characters hex string - uri: an URI as parsed
+       * by Golang net/url.ParseRequestURI - email: an email address as parsed by Golang
+       * net/mail.ParseAddress - hostname: a valid representation for an Internet host name, as
+       * defined by RFC 1034, section 3.1 [RFC1034]. - ipv4: an IPv4 IP as parsed by Golang
+       * net.ParseIP - ipv6: an IPv6 IP as parsed by Golang net.ParseIP - cidr: a CIDR as parsed by
+       * Golang net.ParseCIDR - mac: a MAC address as parsed by Golang net.ParseMAC - uuid: an UUID
+       * that allows uppercase defined by the regex
+       * (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$ - uuid3: an UUID3
+       * that allows uppercase defined by the regex
+       * (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?3[0-9a-f]{3}-?[0-9a-f]{4}-?[0-9a-f]{12}$ - uuid4: an UUID4
+       * that allows uppercase defined by the regex
+       * (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?4[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12}$ - uuid5: an
+       * UUID5 that allows uppercase defined by the regex
+       * (?i)^[0-9a-f]{8}-?[0-9a-f]{4}-?5[0-9a-f]{3}-?[89ab][0-9a-f]{3}-?[0-9a-f]{12}$ - isbn: an
+       * ISBN10 or ISBN13 number string like "0321751043" or "978-0321751041" - isbn10: an ISBN10
+       * number string like "0321751043" - isbn13: an ISBN13 number string like "978-0321751041" -
+       * creditcard: a credit card number defined by the regex
+       * ^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$
+       * with any non digit characters mixed in - ssn: a U.S. social security number following the
+       * regex ^\d{3}[- ]?\d{2}[- ]?\d{4}$ - hexcolor: an hexadecimal color code like "#FFFFFF:
+       * following the regex ^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$ - rgbcolor: an RGB color code like
+       * rgb like "rgb(255,255,2559" - byte: base64 encoded binary data - password: any kind of
+       * string - date: a date string like "2006-01-02" as defined by full-date in RFC3339 -
+       * duration: a duration string like "22 ns" as parsed by Golang time.ParseDuration or
+       * compatible with Scala duration format - datetime: a date time string like
+       * "2014-12-15T19:30:20.000Z" as defined by date-time in RFC3339.
+       */
       readonly format: string
 
       
@@ -2417,7 +2478,8 @@ export namespace apiextensions {
        *      may be used on any type of list (struct, scalar, ...).
        * 2) `set`:
        *      Sets are lists that must not have multiple items with the same value. Each
-       *      value must be a scalar (or another atomic type).
+       *      value must be a scalar, an object with x-kubernetes-map-type `atomic` or an
+       *      array with x-kubernetes-list-type `atomic`.
        * 3) `map`:
        *      These lists are like maps in that their elements have a non-index key
        *      used to identify them. Order is preserved upon merge. The map tag
@@ -3928,1864 +3990,6 @@ export namespace apps {
        * RollingUpdateStatefulSetStrategyType.
        */
       readonly rollingUpdate: apps.v1.RollingUpdateStatefulSetStrategy
-
-      /**
-       * Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.
-       */
-      readonly type: string
-
-    }
-
-  }
-
-  export namespace v1beta1 {
-    /**
-     * @deprecated apps/v1beta1/ControllerRevision is not supported by Kubernetes 1.16+ clusters.
-     * Use apps/v1/ControllerRevision instead.
-     * 
-     * ControllerRevision implements an immutable snapshot of state data. Clients are responsible
-     * for serializing and deserializing the objects that contain their internal state. Once a
-     * ControllerRevision has been successfully created, it can not be updated. The API Server will
-     * fail validation of all requests that attempt to mutate the Data field. ControllerRevisions
-     * may, however, be deleted. Note that, due to its use by both the DaemonSet and StatefulSet
-     * controllers for update and rollback, this object is beta. However, it may be subject to name
-     * and representation changes in future releases, and clients should not depend on its
-     * stability. It is primarily for internal use by controllers.
-     */
-    export interface ControllerRevision {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta1"
-
-      /**
-       * Data is the serialized representation of the state.
-       */
-      readonly data: object
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "ControllerRevision"
-
-      /**
-       * Standard object's metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * Revision indicates the revision of the state represented by Data.
-       */
-      readonly revision: number
-
-    }
-
-    /**
-     * ControllerRevisionList is a resource containing a list of ControllerRevision objects.
-     */
-    export interface ControllerRevisionList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta1"
-
-      /**
-       * Items is the list of ControllerRevisions
-       */
-      readonly items: apps.v1beta1.ControllerRevision[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "ControllerRevisionList"
-
-      /**
-       * More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * @deprecated apps/v1beta1/Deployment is not supported by Kubernetes 1.16+ clusters. Use
-     * apps/v1/Deployment instead.
-     * 
-     * Deployment enables declarative updates for Pods and ReplicaSets.
-     */
-    export interface Deployment {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta1"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "Deployment"
-
-      /**
-       * Standard object metadata.
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * Specification of the desired behavior of the Deployment.
-       */
-      readonly spec: apps.v1beta1.DeploymentSpec
-
-      /**
-       * Most recently observed status of the Deployment.
-       */
-      readonly status: apps.v1beta1.DeploymentStatus
-
-    }
-
-    /**
-     * DeploymentCondition describes the state of a deployment at a certain point.
-     */
-    export interface DeploymentCondition {
-      /**
-       * Last time the condition transitioned from one status to another.
-       */
-      readonly lastTransitionTime: string
-
-      /**
-       * The last time this condition was updated.
-       */
-      readonly lastUpdateTime: string
-
-      /**
-       * A human readable message indicating details about the transition.
-       */
-      readonly message: string
-
-      /**
-       * The reason for the condition's last transition.
-       */
-      readonly reason: string
-
-      /**
-       * Status of the condition, one of True, False, Unknown.
-       */
-      readonly status: string
-
-      /**
-       * Type of deployment condition.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * DeploymentList is a list of Deployments.
-     */
-    export interface DeploymentList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta1"
-
-      /**
-       * Items is the list of Deployments.
-       */
-      readonly items: apps.v1beta1.Deployment[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "DeploymentList"
-
-      /**
-       * Standard list metadata.
-       */
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * DEPRECATED. DeploymentRollback stores the information required to rollback a deployment.
-     */
-    export interface DeploymentRollback {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: string
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: string
-
-      /**
-       * Required: This must match the Name of a deployment.
-       */
-      readonly name: string
-
-      /**
-       * The config of this deployment rollback.
-       */
-      readonly rollbackTo: apps.v1beta1.RollbackConfig
-
-      /**
-       * The annotations to be updated to a deployment
-       */
-      readonly updatedAnnotations: {[key: string]: string}
-
-    }
-
-    /**
-     * DeploymentSpec is the specification of the desired behavior of the Deployment.
-     */
-    export interface DeploymentSpec {
-      /**
-       * Minimum number of seconds for which a newly created pod should be ready without any of its
-       * container crashing, for it to be considered available. Defaults to 0 (pod will be
-       * considered available as soon as it is ready)
-       */
-      readonly minReadySeconds: number
-
-      /**
-       * Indicates that the deployment is paused.
-       */
-      readonly paused: boolean
-
-      /**
-       * The maximum time in seconds for a deployment to make progress before it is considered to be
-       * failed. The deployment controller will continue to process failed deployments and a
-       * condition with a ProgressDeadlineExceeded reason will be surfaced in the deployment status.
-       * Note that progress will not be estimated during the time a deployment is paused. Defaults
-       * to 600s.
-       */
-      readonly progressDeadlineSeconds: number
-
-      /**
-       * Number of desired pods. This is a pointer to distinguish between explicit zero and not
-       * specified. Defaults to 1.
-       */
-      readonly replicas: number
-
-      /**
-       * The number of old ReplicaSets to retain to allow rollback. This is a pointer to distinguish
-       * between explicit zero and not specified. Defaults to 2.
-       */
-      readonly revisionHistoryLimit: number
-
-      /**
-       * DEPRECATED. The config this deployment is rolling back to. Will be cleared after rollback
-       * is done.
-       */
-      readonly rollbackTo: apps.v1beta1.RollbackConfig
-
-      /**
-       * Label selector for pods. Existing ReplicaSets whose pods are selected by this will be the
-       * ones affected by this deployment.
-       */
-      readonly selector: meta.v1.LabelSelector
-
-      /**
-       * The deployment strategy to use to replace existing pods with new ones.
-       */
-      readonly strategy: apps.v1beta1.DeploymentStrategy
-
-      /**
-       * Template describes the pods that will be created.
-       */
-      readonly template: core.v1.PodTemplateSpec
-
-    }
-
-    /**
-     * DeploymentStatus is the most recently observed status of the Deployment.
-     */
-    export interface DeploymentStatus {
-      /**
-       * Total number of available pods (ready for at least minReadySeconds) targeted by this
-       * deployment.
-       */
-      readonly availableReplicas: number
-
-      /**
-       * Count of hash collisions for the Deployment. The Deployment controller uses this field as a
-       * collision avoidance mechanism when it needs to create the name for the newest ReplicaSet.
-       */
-      readonly collisionCount: number
-
-      /**
-       * Represents the latest available observations of a deployment's current state.
-       */
-      readonly conditions: apps.v1beta1.DeploymentCondition[]
-
-      /**
-       * The generation observed by the deployment controller.
-       */
-      readonly observedGeneration: number
-
-      /**
-       * Total number of ready pods targeted by this deployment.
-       */
-      readonly readyReplicas: number
-
-      /**
-       * Total number of non-terminated pods targeted by this deployment (their labels match the
-       * selector).
-       */
-      readonly replicas: number
-
-      /**
-       * Total number of unavailable pods targeted by this deployment. This is the total number of
-       * pods that are still required for the deployment to have 100% available capacity. They may
-       * either be pods that are running but not yet available or pods that still have not been
-       * created.
-       */
-      readonly unavailableReplicas: number
-
-      /**
-       * Total number of non-terminated pods targeted by this deployment that have the desired
-       * template spec.
-       */
-      readonly updatedReplicas: number
-
-    }
-
-    /**
-     * DeploymentStrategy describes how to replace existing pods with new ones.
-     */
-    export interface DeploymentStrategy {
-      /**
-       * Rolling update config params. Present only if DeploymentStrategyType = RollingUpdate.
-       */
-      readonly rollingUpdate: apps.v1beta1.RollingUpdateDeployment
-
-      /**
-       * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * DEPRECATED.
-     */
-    export interface RollbackConfig {
-      /**
-       * The revision to rollback to. If set to 0, rollback to the last revision.
-       */
-      readonly revision: number
-
-    }
-
-    /**
-     * Spec to control the desired behavior of rolling update.
-     */
-    export interface RollingUpdateDeployment {
-      /**
-       * The maximum number of pods that can be scheduled above the desired number of pods. Value
-       * can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not
-       * be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up.
-       * Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up
-       * immediately when the rolling update starts, such that the total number of old and new pods
-       * do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be
-       * scaled up further, ensuring that total number of pods running at any time during the update
-       * is at most 130% of desired pods.
-       */
-      readonly maxSurge: number | string
-
-      /**
-       * The maximum number of pods that can be unavailable during the update. Value can be an
-       * absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is
-       * calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults
-       * to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of
-       * desired pods immediately when the rolling update starts. Once new pods are ready, old
-       * ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring
-       * that the total number of pods available at all times during the update is at least 70% of
-       * desired pods.
-       */
-      readonly maxUnavailable: number | string
-
-    }
-
-    /**
-     * RollingUpdateStatefulSetStrategy is used to communicate parameter for
-     * RollingUpdateStatefulSetStrategyType.
-     */
-    export interface RollingUpdateStatefulSetStrategy {
-      /**
-       * Partition indicates the ordinal at which the StatefulSet should be partitioned.
-       */
-      readonly partition: number
-
-    }
-
-    /**
-     * Scale represents a scaling request for a resource.
-     */
-    export interface Scale {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: string
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: string
-
-      /**
-       * Standard object metadata; More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * defines the behavior of the scale. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
-       */
-      readonly spec: apps.v1beta1.ScaleSpec
-
-      /**
-       * current status of the scale. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
-       * Read-only.
-       */
-      readonly status: apps.v1beta1.ScaleStatus
-
-    }
-
-    /**
-     * ScaleSpec describes the attributes of a scale subresource
-     */
-    export interface ScaleSpec {
-      /**
-       * desired number of instances for the scaled object.
-       */
-      readonly replicas: number
-
-    }
-
-    /**
-     * ScaleStatus represents the current status of a scale subresource.
-     */
-    export interface ScaleStatus {
-      /**
-       * actual number of observed instances of the scaled object.
-       */
-      readonly replicas: number
-
-      /**
-       * label query over pods that should match the replicas count. More info:
-       * http://kubernetes.io/docs/user-guide/labels#label-selectors
-       */
-      readonly selector: {[key: string]: string}
-
-      /**
-       * label selector for pods that should match the replicas count. This is a serializated
-       * version of both map-based and more expressive set-based selectors. This is done to avoid
-       * introspection in the clients. The string will be in the same format as the query-param
-       * syntax. If the target type only supports map-based selectors, both this field and map-based
-       * selector field are populated. More info:
-       * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-       */
-      readonly targetSelector: string
-
-    }
-
-    /**
-     * @deprecated apps/v1beta1/StatefulSet is not supported by Kubernetes 1.16+ clusters. Use
-     * apps/v1/StatefulSet instead.
-     * 
-     * StatefulSet represents a set of pods with consistent identities. Identities are defined as:
-     *  - Network: A single stable DNS and hostname.
-     *  - Storage: As many VolumeClaims as requested.
-     * The StatefulSet guarantees that a given network identity will always map to the same storage
-     * identity.
-     */
-    export interface StatefulSet {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta1"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "StatefulSet"
-
-      
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * Spec defines the desired identities of pods in this set.
-       */
-      readonly spec: apps.v1beta1.StatefulSetSpec
-
-      /**
-       * Status is the current status of Pods in this StatefulSet. This data may be out of date by
-       * some window of time.
-       */
-      readonly status: apps.v1beta1.StatefulSetStatus
-
-    }
-
-    /**
-     * StatefulSetCondition describes the state of a statefulset at a certain point.
-     */
-    export interface StatefulSetCondition {
-      /**
-       * Last time the condition transitioned from one status to another.
-       */
-      readonly lastTransitionTime: string
-
-      /**
-       * A human readable message indicating details about the transition.
-       */
-      readonly message: string
-
-      /**
-       * The reason for the condition's last transition.
-       */
-      readonly reason: string
-
-      /**
-       * Status of the condition, one of True, False, Unknown.
-       */
-      readonly status: string
-
-      /**
-       * Type of statefulset condition.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * StatefulSetList is a collection of StatefulSets.
-     */
-    export interface StatefulSetList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta1"
-
-      
-      readonly items: apps.v1beta1.StatefulSet[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "StatefulSetList"
-
-      
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * A StatefulSetSpec is the specification of a StatefulSet.
-     */
-    export interface StatefulSetSpec {
-      /**
-       * podManagementPolicy controls how pods are created during initial scale up, when replacing
-       * pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are
-       * created in increasing order (pod-0, then pod-1, etc) and the controller will wait until
-       * each pod is ready before continuing. When scaling down, the pods are removed in the
-       * opposite order. The alternative policy is `Parallel` which will create pods in parallel to
-       * match the desired scale without waiting, and on scale down will delete all pods at once.
-       */
-      readonly podManagementPolicy: string
-
-      /**
-       * replicas is the desired number of replicas of the given Template. These are replicas in the
-       * sense that they are instantiations of the same Template, but individual replicas also have
-       * a consistent identity. If unspecified, defaults to 1.
-       */
-      readonly replicas: number
-
-      /**
-       * revisionHistoryLimit is the maximum number of revisions that will be maintained in the
-       * StatefulSet's revision history. The revision history consists of all revisions not
-       * represented by a currently applied StatefulSetSpec version. The default value is 10.
-       */
-      readonly revisionHistoryLimit: number
-
-      /**
-       * selector is a label query over pods that should match the replica count. If empty,
-       * defaulted to labels on the pod template. More info:
-       * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-       */
-      readonly selector: meta.v1.LabelSelector
-
-      /**
-       * serviceName is the name of the service that governs this StatefulSet. This service must
-       * exist before the StatefulSet, and is responsible for the network identity of the set. Pods
-       * get DNS/hostnames that follow the pattern:
-       * pod-specific-string.serviceName.default.svc.cluster.local where "pod-specific-string" is
-       * managed by the StatefulSet controller.
-       */
-      readonly serviceName: string
-
-      /**
-       * template is the object that describes the pod that will be created if insufficient replicas
-       * are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have
-       * a unique identity from the rest of the StatefulSet.
-       */
-      readonly template: core.v1.PodTemplateSpec
-
-      /**
-       * updateStrategy indicates the StatefulSetUpdateStrategy that will be employed to update Pods
-       * in the StatefulSet when a revision is made to Template.
-       */
-      readonly updateStrategy: apps.v1beta1.StatefulSetUpdateStrategy
-
-      /**
-       * volumeClaimTemplates is a list of claims that pods are allowed to reference. The
-       * StatefulSet controller is responsible for mapping network identities to claims in a way
-       * that maintains the identity of a pod. Every claim in this list must have at least one
-       * matching (by name) volumeMount in one container in the template. A claim in this list takes
-       * precedence over any volumes in the template, with the same name.
-       */
-      readonly volumeClaimTemplates: core.v1.PersistentVolumeClaim[]
-
-    }
-
-    /**
-     * StatefulSetStatus represents the current state of a StatefulSet.
-     */
-    export interface StatefulSetStatus {
-      /**
-       * collisionCount is the count of hash collisions for the StatefulSet. The StatefulSet
-       * controller uses this field as a collision avoidance mechanism when it needs to create the
-       * name for the newest ControllerRevision.
-       */
-      readonly collisionCount: number
-
-      /**
-       * Represents the latest available observations of a statefulset's current state.
-       */
-      readonly conditions: apps.v1beta1.StatefulSetCondition[]
-
-      /**
-       * currentReplicas is the number of Pods created by the StatefulSet controller from the
-       * StatefulSet version indicated by currentRevision.
-       */
-      readonly currentReplicas: number
-
-      /**
-       * currentRevision, if not empty, indicates the version of the StatefulSet used to generate
-       * Pods in the sequence [0,currentReplicas).
-       */
-      readonly currentRevision: string
-
-      /**
-       * observedGeneration is the most recent generation observed for this StatefulSet. It
-       * corresponds to the StatefulSet's generation, which is updated on mutation by the API
-       * Server.
-       */
-      readonly observedGeneration: number
-
-      /**
-       * readyReplicas is the number of Pods created by the StatefulSet controller that have a Ready
-       * Condition.
-       */
-      readonly readyReplicas: number
-
-      /**
-       * replicas is the number of Pods created by the StatefulSet controller.
-       */
-      readonly replicas: number
-
-      /**
-       * updateRevision, if not empty, indicates the version of the StatefulSet used to generate
-       * Pods in the sequence [replicas-updatedReplicas,replicas)
-       */
-      readonly updateRevision: string
-
-      /**
-       * updatedReplicas is the number of Pods created by the StatefulSet controller from the
-       * StatefulSet version indicated by updateRevision.
-       */
-      readonly updatedReplicas: number
-
-    }
-
-    /**
-     * StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to
-     * perform updates. It includes any additional parameters necessary to perform the update for
-     * the indicated strategy.
-     */
-    export interface StatefulSetUpdateStrategy {
-      /**
-       * RollingUpdate is used to communicate parameters when Type is
-       * RollingUpdateStatefulSetStrategyType.
-       */
-      readonly rollingUpdate: apps.v1beta1.RollingUpdateStatefulSetStrategy
-
-      /**
-       * Type indicates the type of the StatefulSetUpdateStrategy.
-       */
-      readonly type: string
-
-    }
-
-  }
-
-  export namespace v1beta2 {
-    /**
-     * @deprecated apps/v1beta2/ControllerRevision is not supported by Kubernetes 1.16+ clusters.
-     * Use apps/v1/ControllerRevision instead.
-     * 
-     * ControllerRevision implements an immutable snapshot of state data. Clients are responsible
-     * for serializing and deserializing the objects that contain their internal state. Once a
-     * ControllerRevision has been successfully created, it can not be updated. The API Server will
-     * fail validation of all requests that attempt to mutate the Data field. ControllerRevisions
-     * may, however, be deleted. Note that, due to its use by both the DaemonSet and StatefulSet
-     * controllers for update and rollback, this object is beta. However, it may be subject to name
-     * and representation changes in future releases, and clients should not depend on its
-     * stability. It is primarily for internal use by controllers.
-     */
-    export interface ControllerRevision {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta2"
-
-      /**
-       * Data is the serialized representation of the state.
-       */
-      readonly data: object
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "ControllerRevision"
-
-      /**
-       * Standard object's metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * Revision indicates the revision of the state represented by Data.
-       */
-      readonly revision: number
-
-    }
-
-    /**
-     * ControllerRevisionList is a resource containing a list of ControllerRevision objects.
-     */
-    export interface ControllerRevisionList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta2"
-
-      /**
-       * Items is the list of ControllerRevisions
-       */
-      readonly items: apps.v1beta2.ControllerRevision[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "ControllerRevisionList"
-
-      /**
-       * More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * @deprecated apps/v1beta2/DaemonSet is not supported by Kubernetes 1.16+ clusters. Use
-     * apps/v1/DaemonSet instead.
-     * 
-     * DaemonSet represents the configuration of a daemon set.
-     */
-    export interface DaemonSet {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta2"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "DaemonSet"
-
-      /**
-       * Standard object's metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * The desired behavior of this daemon set. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-       */
-      readonly spec: apps.v1beta2.DaemonSetSpec
-
-      /**
-       * The current status of this daemon set. This data may be out of date by some window of time.
-       * Populated by the system. Read-only. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-       */
-      readonly status: apps.v1beta2.DaemonSetStatus
-
-    }
-
-    /**
-     * DaemonSetCondition describes the state of a DaemonSet at a certain point.
-     */
-    export interface DaemonSetCondition {
-      /**
-       * Last time the condition transitioned from one status to another.
-       */
-      readonly lastTransitionTime: string
-
-      /**
-       * A human readable message indicating details about the transition.
-       */
-      readonly message: string
-
-      /**
-       * The reason for the condition's last transition.
-       */
-      readonly reason: string
-
-      /**
-       * Status of the condition, one of True, False, Unknown.
-       */
-      readonly status: string
-
-      /**
-       * Type of DaemonSet condition.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * DaemonSetList is a collection of daemon sets.
-     */
-    export interface DaemonSetList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta2"
-
-      /**
-       * A list of daemon sets.
-       */
-      readonly items: apps.v1beta2.DaemonSet[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "DaemonSetList"
-
-      /**
-       * Standard list metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * DaemonSetSpec is the specification of a daemon set.
-     */
-    export interface DaemonSetSpec {
-      /**
-       * The minimum number of seconds for which a newly created DaemonSet pod should be ready
-       * without any of its container crashing, for it to be considered available. Defaults to 0
-       * (pod will be considered available as soon as it is ready).
-       */
-      readonly minReadySeconds: number
-
-      /**
-       * The number of old history to retain to allow rollback. This is a pointer to distinguish
-       * between explicit zero and not specified. Defaults to 10.
-       */
-      readonly revisionHistoryLimit: number
-
-      /**
-       * A label query over pods that are managed by the daemon set. Must match in order to be
-       * controlled. It must match the pod template's labels. More info:
-       * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-       */
-      readonly selector: meta.v1.LabelSelector
-
-      /**
-       * An object that describes the pod that will be created. The DaemonSet will create exactly
-       * one copy of this pod on every node that matches the template's node selector (or on every
-       * node if no node selector is specified). More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
-       */
-      readonly template: core.v1.PodTemplateSpec
-
-      /**
-       * An update strategy to replace existing DaemonSet pods with new pods.
-       */
-      readonly updateStrategy: apps.v1beta2.DaemonSetUpdateStrategy
-
-    }
-
-    /**
-     * DaemonSetStatus represents the current status of a daemon set.
-     */
-    export interface DaemonSetStatus {
-      /**
-       * Count of hash collisions for the DaemonSet. The DaemonSet controller uses this field as a
-       * collision avoidance mechanism when it needs to create the name for the newest
-       * ControllerRevision.
-       */
-      readonly collisionCount: number
-
-      /**
-       * Represents the latest available observations of a DaemonSet's current state.
-       */
-      readonly conditions: apps.v1beta2.DaemonSetCondition[]
-
-      /**
-       * The number of nodes that are running at least 1 daemon pod and are supposed to run the
-       * daemon pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
-       */
-      readonly currentNumberScheduled: number
-
-      /**
-       * The total number of nodes that should be running the daemon pod (including nodes correctly
-       * running the daemon pod). More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
-       */
-      readonly desiredNumberScheduled: number
-
-      /**
-       * The number of nodes that should be running the daemon pod and have one or more of the
-       * daemon pod running and available (ready for at least spec.minReadySeconds)
-       */
-      readonly numberAvailable: number
-
-      /**
-       * The number of nodes that are running the daemon pod, but are not supposed to run the daemon
-       * pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
-       */
-      readonly numberMisscheduled: number
-
-      /**
-       * The number of nodes that should be running the daemon pod and have one or more of the
-       * daemon pod running and ready.
-       */
-      readonly numberReady: number
-
-      /**
-       * The number of nodes that should be running the daemon pod and have none of the daemon pod
-       * running and available (ready for at least spec.minReadySeconds)
-       */
-      readonly numberUnavailable: number
-
-      /**
-       * The most recent generation observed by the daemon set controller.
-       */
-      readonly observedGeneration: number
-
-      /**
-       * The total number of nodes that are running updated daemon pod
-       */
-      readonly updatedNumberScheduled: number
-
-    }
-
-    /**
-     * DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.
-     */
-    export interface DaemonSetUpdateStrategy {
-      /**
-       * Rolling update config params. Present only if type = "RollingUpdate".
-       */
-      readonly rollingUpdate: apps.v1beta2.RollingUpdateDaemonSet
-
-      /**
-       * Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is RollingUpdate.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * @deprecated apps/v1beta2/Deployment is not supported by Kubernetes 1.16+ clusters. Use
-     * apps/v1/Deployment instead.
-     * 
-     * Deployment enables declarative updates for Pods and ReplicaSets.
-     */
-    export interface Deployment {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta2"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "Deployment"
-
-      /**
-       * Standard object metadata.
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * Specification of the desired behavior of the Deployment.
-       */
-      readonly spec: apps.v1beta2.DeploymentSpec
-
-      /**
-       * Most recently observed status of the Deployment.
-       */
-      readonly status: apps.v1beta2.DeploymentStatus
-
-    }
-
-    /**
-     * DeploymentCondition describes the state of a deployment at a certain point.
-     */
-    export interface DeploymentCondition {
-      /**
-       * Last time the condition transitioned from one status to another.
-       */
-      readonly lastTransitionTime: string
-
-      /**
-       * The last time this condition was updated.
-       */
-      readonly lastUpdateTime: string
-
-      /**
-       * A human readable message indicating details about the transition.
-       */
-      readonly message: string
-
-      /**
-       * The reason for the condition's last transition.
-       */
-      readonly reason: string
-
-      /**
-       * Status of the condition, one of True, False, Unknown.
-       */
-      readonly status: string
-
-      /**
-       * Type of deployment condition.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * DeploymentList is a list of Deployments.
-     */
-    export interface DeploymentList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta2"
-
-      /**
-       * Items is the list of Deployments.
-       */
-      readonly items: apps.v1beta2.Deployment[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "DeploymentList"
-
-      /**
-       * Standard list metadata.
-       */
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * DeploymentSpec is the specification of the desired behavior of the Deployment.
-     */
-    export interface DeploymentSpec {
-      /**
-       * Minimum number of seconds for which a newly created pod should be ready without any of its
-       * container crashing, for it to be considered available. Defaults to 0 (pod will be
-       * considered available as soon as it is ready)
-       */
-      readonly minReadySeconds: number
-
-      /**
-       * Indicates that the deployment is paused.
-       */
-      readonly paused: boolean
-
-      /**
-       * The maximum time in seconds for a deployment to make progress before it is considered to be
-       * failed. The deployment controller will continue to process failed deployments and a
-       * condition with a ProgressDeadlineExceeded reason will be surfaced in the deployment status.
-       * Note that progress will not be estimated during the time a deployment is paused. Defaults
-       * to 600s.
-       */
-      readonly progressDeadlineSeconds: number
-
-      /**
-       * Number of desired pods. This is a pointer to distinguish between explicit zero and not
-       * specified. Defaults to 1.
-       */
-      readonly replicas: number
-
-      /**
-       * The number of old ReplicaSets to retain to allow rollback. This is a pointer to distinguish
-       * between explicit zero and not specified. Defaults to 10.
-       */
-      readonly revisionHistoryLimit: number
-
-      /**
-       * Label selector for pods. Existing ReplicaSets whose pods are selected by this will be the
-       * ones affected by this deployment. It must match the pod template's labels.
-       */
-      readonly selector: meta.v1.LabelSelector
-
-      /**
-       * The deployment strategy to use to replace existing pods with new ones.
-       */
-      readonly strategy: apps.v1beta2.DeploymentStrategy
-
-      /**
-       * Template describes the pods that will be created.
-       */
-      readonly template: core.v1.PodTemplateSpec
-
-    }
-
-    /**
-     * DeploymentStatus is the most recently observed status of the Deployment.
-     */
-    export interface DeploymentStatus {
-      /**
-       * Total number of available pods (ready for at least minReadySeconds) targeted by this
-       * deployment.
-       */
-      readonly availableReplicas: number
-
-      /**
-       * Count of hash collisions for the Deployment. The Deployment controller uses this field as a
-       * collision avoidance mechanism when it needs to create the name for the newest ReplicaSet.
-       */
-      readonly collisionCount: number
-
-      /**
-       * Represents the latest available observations of a deployment's current state.
-       */
-      readonly conditions: apps.v1beta2.DeploymentCondition[]
-
-      /**
-       * The generation observed by the deployment controller.
-       */
-      readonly observedGeneration: number
-
-      /**
-       * Total number of ready pods targeted by this deployment.
-       */
-      readonly readyReplicas: number
-
-      /**
-       * Total number of non-terminated pods targeted by this deployment (their labels match the
-       * selector).
-       */
-      readonly replicas: number
-
-      /**
-       * Total number of unavailable pods targeted by this deployment. This is the total number of
-       * pods that are still required for the deployment to have 100% available capacity. They may
-       * either be pods that are running but not yet available or pods that still have not been
-       * created.
-       */
-      readonly unavailableReplicas: number
-
-      /**
-       * Total number of non-terminated pods targeted by this deployment that have the desired
-       * template spec.
-       */
-      readonly updatedReplicas: number
-
-    }
-
-    /**
-     * DeploymentStrategy describes how to replace existing pods with new ones.
-     */
-    export interface DeploymentStrategy {
-      /**
-       * Rolling update config params. Present only if DeploymentStrategyType = RollingUpdate.
-       */
-      readonly rollingUpdate: apps.v1beta2.RollingUpdateDeployment
-
-      /**
-       * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * @deprecated apps/v1beta2/ReplicaSet is not supported by Kubernetes 1.16+ clusters. Use
-     * apps/v1/ReplicaSet instead.
-     * 
-     * ReplicaSet ensures that a specified number of pod replicas are running at any given time.
-     */
-    export interface ReplicaSet {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta2"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "ReplicaSet"
-
-      /**
-       * If the Labels of a ReplicaSet are empty, they are defaulted to be the same as the Pod(s)
-       * that the ReplicaSet manages. Standard object's metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * Spec defines the specification of the desired behavior of the ReplicaSet. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-       */
-      readonly spec: apps.v1beta2.ReplicaSetSpec
-
-      /**
-       * Status is the most recently observed status of the ReplicaSet. This data may be out of date
-       * by some window of time. Populated by the system. Read-only. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-       */
-      readonly status: apps.v1beta2.ReplicaSetStatus
-
-    }
-
-    /**
-     * ReplicaSetCondition describes the state of a replica set at a certain point.
-     */
-    export interface ReplicaSetCondition {
-      /**
-       * The last time the condition transitioned from one status to another.
-       */
-      readonly lastTransitionTime: string
-
-      /**
-       * A human readable message indicating details about the transition.
-       */
-      readonly message: string
-
-      /**
-       * The reason for the condition's last transition.
-       */
-      readonly reason: string
-
-      /**
-       * Status of the condition, one of True, False, Unknown.
-       */
-      readonly status: string
-
-      /**
-       * Type of replica set condition.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * ReplicaSetList is a collection of ReplicaSets.
-     */
-    export interface ReplicaSetList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta2"
-
-      /**
-       * List of ReplicaSets. More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller
-       */
-      readonly items: apps.v1beta2.ReplicaSet[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "ReplicaSetList"
-
-      /**
-       * Standard list metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * ReplicaSetSpec is the specification of a ReplicaSet.
-     */
-    export interface ReplicaSetSpec {
-      /**
-       * Minimum number of seconds for which a newly created pod should be ready without any of its
-       * container crashing, for it to be considered available. Defaults to 0 (pod will be
-       * considered available as soon as it is ready)
-       */
-      readonly minReadySeconds: number
-
-      /**
-       * Replicas is the number of desired replicas. This is a pointer to distinguish between
-       * explicit zero and unspecified. Defaults to 1. More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller
-       */
-      readonly replicas: number
-
-      /**
-       * Selector is a label query over pods that should match the replica count. Label keys and
-       * values that must match in order to be controlled by this replica set. It must match the pod
-       * template's labels. More info:
-       * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-       */
-      readonly selector: meta.v1.LabelSelector
-
-      /**
-       * Template is the object that describes the pod that will be created if insufficient replicas
-       * are detected. More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
-       */
-      readonly template: core.v1.PodTemplateSpec
-
-    }
-
-    /**
-     * ReplicaSetStatus represents the current status of a ReplicaSet.
-     */
-    export interface ReplicaSetStatus {
-      /**
-       * The number of available replicas (ready for at least minReadySeconds) for this replica set.
-       */
-      readonly availableReplicas: number
-
-      /**
-       * Represents the latest available observations of a replica set's current state.
-       */
-      readonly conditions: apps.v1beta2.ReplicaSetCondition[]
-
-      /**
-       * The number of pods that have labels matching the labels of the pod template of the
-       * replicaset.
-       */
-      readonly fullyLabeledReplicas: number
-
-      /**
-       * ObservedGeneration reflects the generation of the most recently observed ReplicaSet.
-       */
-      readonly observedGeneration: number
-
-      /**
-       * The number of ready replicas for this replica set.
-       */
-      readonly readyReplicas: number
-
-      /**
-       * Replicas is the most recently oberved number of replicas. More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller
-       */
-      readonly replicas: number
-
-    }
-
-    /**
-     * Spec to control the desired behavior of daemon set rolling update.
-     */
-    export interface RollingUpdateDaemonSet {
-      /**
-       * The maximum number of DaemonSet pods that can be unavailable during the update. Value can
-       * be an absolute number (ex: 5) or a percentage of total number of DaemonSet pods at the
-       * start of the update (ex: 10%). Absolute number is calculated from percentage by rounding
-       * up. This cannot be 0. Default value is 1. Example: when this is set to 30%, at most 30% of
-       * the total number of nodes that should be running the daemon pod (i.e.
-       * status.desiredNumberScheduled) can have their pods stopped for an update at any given time.
-       * The update starts by stopping at most 30% of those DaemonSet pods and then brings up new
-       * DaemonSet pods in their place. Once the new pods are available, it then proceeds onto other
-       * DaemonSet pods, thus ensuring that at least 70% of original number of DaemonSet pods are
-       * available at all times during the update.
-       */
-      readonly maxUnavailable: number | string
-
-    }
-
-    /**
-     * Spec to control the desired behavior of rolling update.
-     */
-    export interface RollingUpdateDeployment {
-      /**
-       * The maximum number of pods that can be scheduled above the desired number of pods. Value
-       * can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not
-       * be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up.
-       * Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up
-       * immediately when the rolling update starts, such that the total number of old and new pods
-       * do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be
-       * scaled up further, ensuring that total number of pods running at any time during the update
-       * is at most 130% of desired pods.
-       */
-      readonly maxSurge: number | string
-
-      /**
-       * The maximum number of pods that can be unavailable during the update. Value can be an
-       * absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is
-       * calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults
-       * to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of
-       * desired pods immediately when the rolling update starts. Once new pods are ready, old
-       * ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring
-       * that the total number of pods available at all times during the update is at least 70% of
-       * desired pods.
-       */
-      readonly maxUnavailable: number | string
-
-    }
-
-    /**
-     * RollingUpdateStatefulSetStrategy is used to communicate parameter for
-     * RollingUpdateStatefulSetStrategyType.
-     */
-    export interface RollingUpdateStatefulSetStrategy {
-      /**
-       * Partition indicates the ordinal at which the StatefulSet should be partitioned. Default
-       * value is 0.
-       */
-      readonly partition: number
-
-    }
-
-    /**
-     * Scale represents a scaling request for a resource.
-     */
-    export interface Scale {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: string
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: string
-
-      /**
-       * Standard object metadata; More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * defines the behavior of the scale. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
-       */
-      readonly spec: apps.v1beta2.ScaleSpec
-
-      /**
-       * current status of the scale. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
-       * Read-only.
-       */
-      readonly status: apps.v1beta2.ScaleStatus
-
-    }
-
-    /**
-     * ScaleSpec describes the attributes of a scale subresource
-     */
-    export interface ScaleSpec {
-      /**
-       * desired number of instances for the scaled object.
-       */
-      readonly replicas: number
-
-    }
-
-    /**
-     * ScaleStatus represents the current status of a scale subresource.
-     */
-    export interface ScaleStatus {
-      /**
-       * actual number of observed instances of the scaled object.
-       */
-      readonly replicas: number
-
-      /**
-       * label query over pods that should match the replicas count. More info:
-       * http://kubernetes.io/docs/user-guide/labels#label-selectors
-       */
-      readonly selector: {[key: string]: string}
-
-      /**
-       * label selector for pods that should match the replicas count. This is a serializated
-       * version of both map-based and more expressive set-based selectors. This is done to avoid
-       * introspection in the clients. The string will be in the same format as the query-param
-       * syntax. If the target type only supports map-based selectors, both this field and map-based
-       * selector field are populated. More info:
-       * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-       */
-      readonly targetSelector: string
-
-    }
-
-    /**
-     * @deprecated apps/v1beta2/StatefulSet is not supported by Kubernetes 1.16+ clusters. Use
-     * apps/v1/StatefulSet instead.
-     * 
-     * StatefulSet represents a set of pods with consistent identities. Identities are defined as:
-     *  - Network: A single stable DNS and hostname.
-     *  - Storage: As many VolumeClaims as requested.
-     * The StatefulSet guarantees that a given network identity will always map to the same storage
-     * identity.
-     */
-    export interface StatefulSet {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta2"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "StatefulSet"
-
-      
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * Spec defines the desired identities of pods in this set.
-       */
-      readonly spec: apps.v1beta2.StatefulSetSpec
-
-      /**
-       * Status is the current status of Pods in this StatefulSet. This data may be out of date by
-       * some window of time.
-       */
-      readonly status: apps.v1beta2.StatefulSetStatus
-
-    }
-
-    /**
-     * StatefulSetCondition describes the state of a statefulset at a certain point.
-     */
-    export interface StatefulSetCondition {
-      /**
-       * Last time the condition transitioned from one status to another.
-       */
-      readonly lastTransitionTime: string
-
-      /**
-       * A human readable message indicating details about the transition.
-       */
-      readonly message: string
-
-      /**
-       * The reason for the condition's last transition.
-       */
-      readonly reason: string
-
-      /**
-       * Status of the condition, one of True, False, Unknown.
-       */
-      readonly status: string
-
-      /**
-       * Type of statefulset condition.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * StatefulSetList is a collection of StatefulSets.
-     */
-    export interface StatefulSetList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "apps/v1beta2"
-
-      
-      readonly items: apps.v1beta2.StatefulSet[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "StatefulSetList"
-
-      
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * A StatefulSetSpec is the specification of a StatefulSet.
-     */
-    export interface StatefulSetSpec {
-      /**
-       * podManagementPolicy controls how pods are created during initial scale up, when replacing
-       * pods on nodes, or when scaling down. The default policy is `OrderedReady`, where pods are
-       * created in increasing order (pod-0, then pod-1, etc) and the controller will wait until
-       * each pod is ready before continuing. When scaling down, the pods are removed in the
-       * opposite order. The alternative policy is `Parallel` which will create pods in parallel to
-       * match the desired scale without waiting, and on scale down will delete all pods at once.
-       */
-      readonly podManagementPolicy: string
-
-      /**
-       * replicas is the desired number of replicas of the given Template. These are replicas in the
-       * sense that they are instantiations of the same Template, but individual replicas also have
-       * a consistent identity. If unspecified, defaults to 1.
-       */
-      readonly replicas: number
-
-      /**
-       * revisionHistoryLimit is the maximum number of revisions that will be maintained in the
-       * StatefulSet's revision history. The revision history consists of all revisions not
-       * represented by a currently applied StatefulSetSpec version. The default value is 10.
-       */
-      readonly revisionHistoryLimit: number
-
-      /**
-       * selector is a label query over pods that should match the replica count. It must match the
-       * pod template's labels. More info:
-       * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-       */
-      readonly selector: meta.v1.LabelSelector
-
-      /**
-       * serviceName is the name of the service that governs this StatefulSet. This service must
-       * exist before the StatefulSet, and is responsible for the network identity of the set. Pods
-       * get DNS/hostnames that follow the pattern:
-       * pod-specific-string.serviceName.default.svc.cluster.local where "pod-specific-string" is
-       * managed by the StatefulSet controller.
-       */
-      readonly serviceName: string
-
-      /**
-       * template is the object that describes the pod that will be created if insufficient replicas
-       * are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have
-       * a unique identity from the rest of the StatefulSet.
-       */
-      readonly template: core.v1.PodTemplateSpec
-
-      /**
-       * updateStrategy indicates the StatefulSetUpdateStrategy that will be employed to update Pods
-       * in the StatefulSet when a revision is made to Template.
-       */
-      readonly updateStrategy: apps.v1beta2.StatefulSetUpdateStrategy
-
-      /**
-       * volumeClaimTemplates is a list of claims that pods are allowed to reference. The
-       * StatefulSet controller is responsible for mapping network identities to claims in a way
-       * that maintains the identity of a pod. Every claim in this list must have at least one
-       * matching (by name) volumeMount in one container in the template. A claim in this list takes
-       * precedence over any volumes in the template, with the same name.
-       */
-      readonly volumeClaimTemplates: core.v1.PersistentVolumeClaim[]
-
-    }
-
-    /**
-     * StatefulSetStatus represents the current state of a StatefulSet.
-     */
-    export interface StatefulSetStatus {
-      /**
-       * collisionCount is the count of hash collisions for the StatefulSet. The StatefulSet
-       * controller uses this field as a collision avoidance mechanism when it needs to create the
-       * name for the newest ControllerRevision.
-       */
-      readonly collisionCount: number
-
-      /**
-       * Represents the latest available observations of a statefulset's current state.
-       */
-      readonly conditions: apps.v1beta2.StatefulSetCondition[]
-
-      /**
-       * currentReplicas is the number of Pods created by the StatefulSet controller from the
-       * StatefulSet version indicated by currentRevision.
-       */
-      readonly currentReplicas: number
-
-      /**
-       * currentRevision, if not empty, indicates the version of the StatefulSet used to generate
-       * Pods in the sequence [0,currentReplicas).
-       */
-      readonly currentRevision: string
-
-      /**
-       * observedGeneration is the most recent generation observed for this StatefulSet. It
-       * corresponds to the StatefulSet's generation, which is updated on mutation by the API
-       * Server.
-       */
-      readonly observedGeneration: number
-
-      /**
-       * readyReplicas is the number of Pods created by the StatefulSet controller that have a Ready
-       * Condition.
-       */
-      readonly readyReplicas: number
-
-      /**
-       * replicas is the number of Pods created by the StatefulSet controller.
-       */
-      readonly replicas: number
-
-      /**
-       * updateRevision, if not empty, indicates the version of the StatefulSet used to generate
-       * Pods in the sequence [replicas-updatedReplicas,replicas)
-       */
-      readonly updateRevision: string
-
-      /**
-       * updatedReplicas is the number of Pods created by the StatefulSet controller from the
-       * StatefulSet version indicated by updateRevision.
-       */
-      readonly updatedReplicas: number
-
-    }
-
-    /**
-     * StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to
-     * perform updates. It includes any additional parameters necessary to perform the update for
-     * the indicated strategy.
-     */
-    export interface StatefulSetUpdateStrategy {
-      /**
-       * RollingUpdate is used to communicate parameters when Type is
-       * RollingUpdateStatefulSetStrategyType.
-       */
-      readonly rollingUpdate: apps.v1beta2.RollingUpdateStatefulSetStrategy
 
       /**
        * Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.
@@ -7976,6 +6180,60 @@ export namespace autoscaling {
     }
 
     /**
+     * HPAScalingPolicy is a single policy which must hold true for a specified past interval.
+     */
+    export interface HPAScalingPolicy {
+      /**
+       * PeriodSeconds specifies the window of time for which the policy should hold true.
+       * PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
+       */
+      readonly periodSeconds: number
+
+      /**
+       * Type is used to specify the scaling policy.
+       */
+      readonly type: string
+
+      /**
+       * Value contains the amount of change which is permitted by the policy. It must be greater
+       * than zero
+       */
+      readonly value: number
+
+    }
+
+    /**
+     * HPAScalingRules configures the scaling behavior for one direction. These Rules are applied
+     * after calculating DesiredReplicas from metrics for the HPA. They can limit the scaling
+     * velocity by specifying scaling policies. They can prevent flapping by specifying the
+     * stabilization window, so that the number of replicas is not set instantly, instead, the
+     * safest value from the stabilization window is chosen.
+     */
+    export interface HPAScalingRules {
+      /**
+       * policies is a list of potential scaling polices which can be used during scaling. At least
+       * one policy must be specified, otherwise the HPAScalingRules will be discarded as invalid
+       */
+      readonly policies: autoscaling.v2beta2.HPAScalingPolicy[]
+
+      /**
+       * selectPolicy is used to specify which policy should be used. If not set, the default value
+       * MaxPolicySelect is used.
+       */
+      readonly selectPolicy: string
+
+      /**
+       * StabilizationWindowSeconds is the number of seconds for which past recommendations should
+       * be considered while scaling up or scaling down. StabilizationWindowSeconds must be greater
+       * than or equal to zero and less than or equal to 3600 (one hour). If not set, use the
+       * default values: - For scale up: 0 (i.e. no stabilization is done). - For scale down: 300
+       * (i.e. the stabilization window is 300 seconds long).
+       */
+      readonly stabilizationWindowSeconds: number
+
+    }
+
+    /**
      * HorizontalPodAutoscaler is the configuration for a horizontal pod autoscaler, which
      * automatically manages the replica count of any resource implementing the scale subresource
      * based on the metrics specified.
@@ -8013,6 +6271,28 @@ export namespace autoscaling {
        * status is the current information about the autoscaler.
        */
       readonly status: autoscaling.v2beta2.HorizontalPodAutoscalerStatus
+
+    }
+
+    /**
+     * HorizontalPodAutoscalerBehavior configures the scaling behavior of the target in both Up and
+     * Down directions (scaleUp and scaleDown fields respectively).
+     */
+    export interface HorizontalPodAutoscalerBehavior {
+      /**
+       * scaleDown is scaling policy for scaling Down. If not set, the default value is to allow to
+       * scale down to minReplicas pods, with a 300 second stabilization window (i.e., the highest
+       * recommendation for the last 300sec is used).
+       */
+      readonly scaleDown: autoscaling.v2beta2.HPAScalingRules
+
+      /**
+       * scaleUp is scaling policy for scaling Up. If not set, the default value is the higher of:
+       *   * increase no more than 4 pods per 60 seconds
+       *   * double the number of pods per 60 seconds
+       * No stabilization is used.
+       */
+      readonly scaleUp: autoscaling.v2beta2.HPAScalingRules
 
     }
 
@@ -8085,6 +6365,13 @@ export namespace autoscaling {
      * HorizontalPodAutoscaler.
      */
     export interface HorizontalPodAutoscalerSpec {
+      /**
+       * behavior configures the scaling behavior of the target in both Up and Down directions
+       * (scaleUp and scaleDown fields respectively). If not set, the default HPAScalingRules for
+       * scale up and scale down are used.
+       */
+      readonly behavior: autoscaling.v2beta2.HorizontalPodAutoscalerBehavior
+
       /**
        * maxReplicas is the upper limit for the number of replicas to which the autoscaler can scale
        * up. It cannot be less that minReplicas.
@@ -10832,7 +9119,8 @@ export namespace core {
 
       /**
        * Selects a field of the pod: supports metadata.name, metadata.namespace, metadata.labels,
-       * metadata.annotations, spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP.
+       * metadata.annotations, spec.nodeName, spec.serviceAccountName, status.hostIP, status.podIP,
+       * status.podIPs.
        */
       readonly fieldRef: core.v1.ObjectFieldSelector
 
@@ -13680,8 +11968,7 @@ export namespace core {
        * Share a single process namespace between all of the containers in a pod. When this is set
        * containers will be able to view and signal processes from other containers in the same pod,
        * and the first process in each container will not be assigned PID 1. HostPID and
-       * ShareProcessNamespace cannot both be set. Optional: Default to false. This field is
-       * beta-level and may be disabled with the PodShareProcessNamespace feature.
+       * ShareProcessNamespace cannot both be set. Optional: Default to false.
        */
       readonly shareProcessNamespace: boolean
 
@@ -15348,6 +13635,19 @@ export namespace core {
       readonly sessionAffinityConfig: core.v1.SessionAffinityConfig
 
       /**
+       * topologyKeys is a preference-order list of topology keys which implementations of services
+       * should use to preferentially sort endpoints when accessing this Service, it can not be used
+       * at the same time as externalTrafficPolicy=Local. Topology keys must be valid label keys and
+       * at most 16 keys may be specified. Endpoints are chosen based on the first topology key with
+       * available backends. If this field is specified and all entries have no backends that match
+       * the topology of the client, the service has no backends for that client and connections
+       * should fail. The special value "*" may be used to mean "any topology". This catch-all
+       * value, if used, only makes sense as the last value in the list. If this is not specified or
+       * empty, no topology constraints will be applied.
+       */
+      readonly topologyKeys: string[]
+
+      /**
        * type determines how the Service is exposed. Defaults to ClusterIP. Valid options are
        * ExternalName, ClusterIP, NodePort, and LoadBalancer. "ExternalName" maps to the specified
        * externalName. "ClusterIP" allocates a cluster-internal IP address for load-balancing to
@@ -16002,8 +14302,8 @@ export namespace core {
        * The UserName in Windows to run the entrypoint of the container process. Defaults to the
        * user specified in image metadata if unspecified. May also be set in PodSecurityContext. If
        * set in both SecurityContext and PodSecurityContext, the value specified in SecurityContext
-       * takes precedence. This field is alpha-level and it is only honored by servers that enable
-       * the WindowsRunAsUserName feature flag.
+       * takes precedence. This field is beta-level and may be disabled with the
+       * WindowsRunAsUserName feature flag.
        */
       readonly runAsUserName: string
 
@@ -16014,24 +14314,23 @@ export namespace core {
 }
 
 export namespace discovery {
-  export namespace v1alpha1 {
+  export namespace v1beta1 {
     /**
      * Endpoint represents a single logical "backend" implementing a service.
      */
     export interface Endpoint {
       /**
        * addresses of this endpoint. The contents of this field are interpreted according to the
-       * corresponding EndpointSlice addressType field. This allows for cases like dual-stack
-       * networking where both IPv4 and IPv6 addresses would be included with the IP addressType.
-       * Consumers (e.g. kube-proxy) must handle different types of addresses in the context of
-       * their own capabilities. This must contain at least one address but no more than 100.
+       * corresponding EndpointSlice addressType field. Consumers must handle different types of
+       * addresses in the context of their own capabilities. This must contain at least one address
+       * but no more than 100.
        */
       readonly addresses: string[]
 
       /**
        * conditions contains information about the current status of the endpoint.
        */
-      readonly conditions: discovery.v1alpha1.EndpointConditions
+      readonly conditions: discovery.v1beta1.EndpointConditions
 
       /**
        * hostname of this endpoint. This field may be used by consumers of endpoints to distinguish
@@ -16081,12 +14380,20 @@ export namespace discovery {
      */
     export interface EndpointPort {
       /**
+       * The application protocol for this port. This field follows standard Kubernetes label
+       * syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and
+       * http://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed
+       * names. Default is empty string.
+       */
+      readonly appProtocol: string
+
+      /**
        * The name of this port. All ports in an EndpointSlice must have a unique name. If the
        * EndpointSlice is dervied from a Kubernetes service, this corresponds to the
-       * Service.ports[].name. Name must either be an empty string or pass IANA_SVC_NAME validation:
-       * * must be no more than 15 characters long * may contain only [-a-z0-9] * must contain at
-       * least one letter [a-z] * it must not start or end with a hyphen, nor contain adjacent
-       * hyphens Default is empty string.
+       * Service.ports[].name. Name must either be an empty string or pass DNS_LABEL validation: *
+       * must be no more than 63 characters long. * must consist of lower case alphanumeric
+       * characters or '-'. * must start and end with an alphanumeric character. Default is empty
+       * string.
        */
       readonly name: string
 
@@ -16111,10 +14418,9 @@ export namespace discovery {
     export interface EndpointSlice {
       /**
        * addressType specifies the type of address carried by this EndpointSlice. All addresses in
-       * this slice must be the same type. The following address types are currently supported: *
-       * IP:   Represents an IP Address. This can include both IPv4 and IPv6
-       *         addresses.
-       * * FQDN: Represents a Fully Qualified Domain Name. Default is IP
+       * this slice must be the same type. This field is immutable after creation. The following
+       * address types are currently supported: * IPv4: Represents an IPv4 Address. * IPv6:
+       * Represents an IPv6 Address. * FQDN: Represents a Fully Qualified Domain Name.
        */
       readonly addressType: string
 
@@ -16124,13 +14430,13 @@ export namespace discovery {
        * values. More info:
        * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
        */
-      readonly apiVersion: "discovery.k8s.io/v1alpha1"
+      readonly apiVersion: "discovery.k8s.io/v1beta1"
 
       /**
        * endpoints is a list of unique endpoints in this slice. Each slice may include a maximum of
        * 1000 endpoints.
        */
-      readonly endpoints: discovery.v1alpha1.Endpoint[]
+      readonly endpoints: discovery.v1beta1.Endpoint[]
 
       /**
        * Kind is a string value representing the REST resource this object represents. Servers may
@@ -16151,7 +14457,7 @@ export namespace discovery {
        * When a port is defined with a nil port value, it indicates "all ports". Each slice may
        * include a maximum of 100 ports.
        */
-      readonly ports: discovery.v1alpha1.EndpointPort[]
+      readonly ports: discovery.v1beta1.EndpointPort[]
 
     }
 
@@ -16165,12 +14471,12 @@ export namespace discovery {
        * values. More info:
        * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
        */
-      readonly apiVersion: "discovery.k8s.io/v1alpha1"
+      readonly apiVersion: "discovery.k8s.io/v1beta1"
 
       /**
        * List of endpoint slices
        */
-      readonly items: discovery.v1alpha1.EndpointSlice[]
+      readonly items: discovery.v1beta1.EndpointSlice[]
 
       /**
        * Kind is a string value representing the REST resource this object represents. Servers may
@@ -16356,581 +14662,6 @@ export namespace events {
 export namespace extensions {
   export namespace v1beta1 {
     /**
-     * AllowedCSIDriver represents a single inline CSI Driver that is allowed to be used.
-     */
-    export interface AllowedCSIDriver {
-      /**
-       * Name is the registered name of the CSI driver
-       */
-      readonly name: string
-
-    }
-
-    /**
-     * AllowedFlexVolume represents a single Flexvolume that is allowed to be used. Deprecated: use
-     * AllowedFlexVolume from policy API Group instead.
-     */
-    export interface AllowedFlexVolume {
-      /**
-       * driver is the name of the Flexvolume driver.
-       */
-      readonly driver: string
-
-    }
-
-    /**
-     * AllowedHostPath defines the host volume conditions that will be enabled by a policy for pods
-     * to use. It requires the path prefix to be defined. Deprecated: use AllowedHostPath from
-     * policy API Group instead.
-     */
-    export interface AllowedHostPath {
-      /**
-       * pathPrefix is the path prefix that the host volume must match. It does not support `*`.
-       * Trailing slashes are trimmed when validating the path prefix with a host path.
-       * 
-       * Examples: `/foo` would allow `/foo`, `/foo/` and `/foo/bar` `/foo` would not allow `/food`
-       * or `/etc/foo`
-       */
-      readonly pathPrefix: string
-
-      /**
-       * when set to true, will allow host volumes matching the pathPrefix only if all volume mounts
-       * are readOnly.
-       */
-      readonly readOnly: boolean
-
-    }
-
-    /**
-     * @deprecated extensions/v1beta1/DaemonSet is not supported by Kubernetes 1.16+ clusters. Use
-     * apps/v1/DaemonSet instead.
-     * 
-     * DaemonSet represents the configuration of a daemon set.
-     */
-    export interface DaemonSet {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "extensions/v1beta1"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "DaemonSet"
-
-      /**
-       * Standard object's metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * The desired behavior of this daemon set. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-       */
-      readonly spec: extensions.v1beta1.DaemonSetSpec
-
-      /**
-       * The current status of this daemon set. This data may be out of date by some window of time.
-       * Populated by the system. Read-only. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-       */
-      readonly status: extensions.v1beta1.DaemonSetStatus
-
-    }
-
-    /**
-     * DaemonSetCondition describes the state of a DaemonSet at a certain point.
-     */
-    export interface DaemonSetCondition {
-      /**
-       * Last time the condition transitioned from one status to another.
-       */
-      readonly lastTransitionTime: string
-
-      /**
-       * A human readable message indicating details about the transition.
-       */
-      readonly message: string
-
-      /**
-       * The reason for the condition's last transition.
-       */
-      readonly reason: string
-
-      /**
-       * Status of the condition, one of True, False, Unknown.
-       */
-      readonly status: string
-
-      /**
-       * Type of DaemonSet condition.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * DaemonSetList is a collection of daemon sets.
-     */
-    export interface DaemonSetList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "extensions/v1beta1"
-
-      /**
-       * A list of daemon sets.
-       */
-      readonly items: extensions.v1beta1.DaemonSet[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "DaemonSetList"
-
-      /**
-       * Standard list metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * DaemonSetSpec is the specification of a daemon set.
-     */
-    export interface DaemonSetSpec {
-      /**
-       * The minimum number of seconds for which a newly created DaemonSet pod should be ready
-       * without any of its container crashing, for it to be considered available. Defaults to 0
-       * (pod will be considered available as soon as it is ready).
-       */
-      readonly minReadySeconds: number
-
-      /**
-       * The number of old history to retain to allow rollback. This is a pointer to distinguish
-       * between explicit zero and not specified. Defaults to 10.
-       */
-      readonly revisionHistoryLimit: number
-
-      /**
-       * A label query over pods that are managed by the daemon set. Must match in order to be
-       * controlled. If empty, defaulted to labels on Pod template. More info:
-       * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
-       */
-      readonly selector: meta.v1.LabelSelector
-
-      /**
-       * An object that describes the pod that will be created. The DaemonSet will create exactly
-       * one copy of this pod on every node that matches the template's node selector (or on every
-       * node if no node selector is specified). More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
-       */
-      readonly template: core.v1.PodTemplateSpec
-
-      /**
-       * DEPRECATED. A sequence number representing a specific generation of the template. Populated
-       * by the system. It can be set only during the creation.
-       */
-      readonly templateGeneration: number
-
-      /**
-       * An update strategy to replace existing DaemonSet pods with new pods.
-       */
-      readonly updateStrategy: extensions.v1beta1.DaemonSetUpdateStrategy
-
-    }
-
-    /**
-     * DaemonSetStatus represents the current status of a daemon set.
-     */
-    export interface DaemonSetStatus {
-      /**
-       * Count of hash collisions for the DaemonSet. The DaemonSet controller uses this field as a
-       * collision avoidance mechanism when it needs to create the name for the newest
-       * ControllerRevision.
-       */
-      readonly collisionCount: number
-
-      /**
-       * Represents the latest available observations of a DaemonSet's current state.
-       */
-      readonly conditions: extensions.v1beta1.DaemonSetCondition[]
-
-      /**
-       * The number of nodes that are running at least 1 daemon pod and are supposed to run the
-       * daemon pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
-       */
-      readonly currentNumberScheduled: number
-
-      /**
-       * The total number of nodes that should be running the daemon pod (including nodes correctly
-       * running the daemon pod). More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
-       */
-      readonly desiredNumberScheduled: number
-
-      /**
-       * The number of nodes that should be running the daemon pod and have one or more of the
-       * daemon pod running and available (ready for at least spec.minReadySeconds)
-       */
-      readonly numberAvailable: number
-
-      /**
-       * The number of nodes that are running the daemon pod, but are not supposed to run the daemon
-       * pod. More info: https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
-       */
-      readonly numberMisscheduled: number
-
-      /**
-       * The number of nodes that should be running the daemon pod and have one or more of the
-       * daemon pod running and ready.
-       */
-      readonly numberReady: number
-
-      /**
-       * The number of nodes that should be running the daemon pod and have none of the daemon pod
-       * running and available (ready for at least spec.minReadySeconds)
-       */
-      readonly numberUnavailable: number
-
-      /**
-       * The most recent generation observed by the daemon set controller.
-       */
-      readonly observedGeneration: number
-
-      /**
-       * The total number of nodes that are running updated daemon pod
-       */
-      readonly updatedNumberScheduled: number
-
-    }
-
-    /**
-     * 
-     */
-    export interface DaemonSetUpdateStrategy {
-      /**
-       * Rolling update config params. Present only if type = "RollingUpdate".
-       */
-      readonly rollingUpdate: extensions.v1beta1.RollingUpdateDaemonSet
-
-      /**
-       * Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is OnDelete.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * @deprecated extensions/v1beta1/Deployment is not supported by Kubernetes 1.16+ clusters. Use
-     * apps/v1/Deployment instead.
-     * 
-     * Deployment enables declarative updates for Pods and ReplicaSets.
-     */
-    export interface Deployment {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "extensions/v1beta1"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "Deployment"
-
-      /**
-       * Standard object metadata.
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * Specification of the desired behavior of the Deployment.
-       */
-      readonly spec: extensions.v1beta1.DeploymentSpec
-
-      /**
-       * Most recently observed status of the Deployment.
-       */
-      readonly status: extensions.v1beta1.DeploymentStatus
-
-    }
-
-    /**
-     * DeploymentCondition describes the state of a deployment at a certain point.
-     */
-    export interface DeploymentCondition {
-      /**
-       * Last time the condition transitioned from one status to another.
-       */
-      readonly lastTransitionTime: string
-
-      /**
-       * The last time this condition was updated.
-       */
-      readonly lastUpdateTime: string
-
-      /**
-       * A human readable message indicating details about the transition.
-       */
-      readonly message: string
-
-      /**
-       * The reason for the condition's last transition.
-       */
-      readonly reason: string
-
-      /**
-       * Status of the condition, one of True, False, Unknown.
-       */
-      readonly status: string
-
-      /**
-       * Type of deployment condition.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * DeploymentList is a list of Deployments.
-     */
-    export interface DeploymentList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "extensions/v1beta1"
-
-      /**
-       * Items is the list of Deployments.
-       */
-      readonly items: extensions.v1beta1.Deployment[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "DeploymentList"
-
-      /**
-       * Standard list metadata.
-       */
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * DEPRECATED. DeploymentRollback stores the information required to rollback a deployment.
-     */
-    export interface DeploymentRollback {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: string
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: string
-
-      /**
-       * Required: This must match the Name of a deployment.
-       */
-      readonly name: string
-
-      /**
-       * The config of this deployment rollback.
-       */
-      readonly rollbackTo: extensions.v1beta1.RollbackConfig
-
-      /**
-       * The annotations to be updated to a deployment
-       */
-      readonly updatedAnnotations: {[key: string]: string}
-
-    }
-
-    /**
-     * DeploymentSpec is the specification of the desired behavior of the Deployment.
-     */
-    export interface DeploymentSpec {
-      /**
-       * Minimum number of seconds for which a newly created pod should be ready without any of its
-       * container crashing, for it to be considered available. Defaults to 0 (pod will be
-       * considered available as soon as it is ready)
-       */
-      readonly minReadySeconds: number
-
-      /**
-       * Indicates that the deployment is paused and will not be processed by the deployment
-       * controller.
-       */
-      readonly paused: boolean
-
-      /**
-       * The maximum time in seconds for a deployment to make progress before it is considered to be
-       * failed. The deployment controller will continue to process failed deployments and a
-       * condition with a ProgressDeadlineExceeded reason will be surfaced in the deployment status.
-       * Note that progress will not be estimated during the time a deployment is paused. This is
-       * set to the max value of int32 (i.e. 2147483647) by default, which means "no deadline".
-       */
-      readonly progressDeadlineSeconds: number
-
-      /**
-       * Number of desired pods. This is a pointer to distinguish between explicit zero and not
-       * specified. Defaults to 1.
-       */
-      readonly replicas: number
-
-      /**
-       * The number of old ReplicaSets to retain to allow rollback. This is a pointer to distinguish
-       * between explicit zero and not specified. This is set to the max value of int32 (i.e.
-       * 2147483647) by default, which means "retaining all old RelicaSets".
-       */
-      readonly revisionHistoryLimit: number
-
-      /**
-       * DEPRECATED. The config this deployment is rolling back to. Will be cleared after rollback
-       * is done.
-       */
-      readonly rollbackTo: extensions.v1beta1.RollbackConfig
-
-      /**
-       * Label selector for pods. Existing ReplicaSets whose pods are selected by this will be the
-       * ones affected by this deployment.
-       */
-      readonly selector: meta.v1.LabelSelector
-
-      /**
-       * The deployment strategy to use to replace existing pods with new ones.
-       */
-      readonly strategy: extensions.v1beta1.DeploymentStrategy
-
-      /**
-       * Template describes the pods that will be created.
-       */
-      readonly template: core.v1.PodTemplateSpec
-
-    }
-
-    /**
-     * DeploymentStatus is the most recently observed status of the Deployment.
-     */
-    export interface DeploymentStatus {
-      /**
-       * Total number of available pods (ready for at least minReadySeconds) targeted by this
-       * deployment.
-       */
-      readonly availableReplicas: number
-
-      /**
-       * Count of hash collisions for the Deployment. The Deployment controller uses this field as a
-       * collision avoidance mechanism when it needs to create the name for the newest ReplicaSet.
-       */
-      readonly collisionCount: number
-
-      /**
-       * Represents the latest available observations of a deployment's current state.
-       */
-      readonly conditions: extensions.v1beta1.DeploymentCondition[]
-
-      /**
-       * The generation observed by the deployment controller.
-       */
-      readonly observedGeneration: number
-
-      /**
-       * Total number of ready pods targeted by this deployment.
-       */
-      readonly readyReplicas: number
-
-      /**
-       * Total number of non-terminated pods targeted by this deployment (their labels match the
-       * selector).
-       */
-      readonly replicas: number
-
-      /**
-       * Total number of unavailable pods targeted by this deployment. This is the total number of
-       * pods that are still required for the deployment to have 100% available capacity. They may
-       * either be pods that are running but not yet available or pods that still have not been
-       * created.
-       */
-      readonly unavailableReplicas: number
-
-      /**
-       * Total number of non-terminated pods targeted by this deployment that have the desired
-       * template spec.
-       */
-      readonly updatedReplicas: number
-
-    }
-
-    /**
-     * DeploymentStrategy describes how to replace existing pods with new ones.
-     */
-    export interface DeploymentStrategy {
-      /**
-       * Rolling update config params. Present only if DeploymentStrategyType = RollingUpdate.
-       */
-      readonly rollingUpdate: extensions.v1beta1.RollingUpdateDeployment
-
-      /**
-       * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
-       */
-      readonly type: string
-
-    }
-
-    /**
-     * FSGroupStrategyOptions defines the strategy type and options used to create the strategy.
-     * Deprecated: use FSGroupStrategyOptions from policy API Group instead.
-     */
-    export interface FSGroupStrategyOptions {
-      /**
-       * ranges are the allowed ranges of fs groups.  If you would like to force a single fs group
-       * then supply a single range with the same start and end. Required for MustRunAs.
-       */
-      readonly ranges: extensions.v1beta1.IDRange[]
-
-      /**
-       * rule is the strategy that will dictate what FSGroup is used in the SecurityContext.
-       */
-      readonly rule: string
-
-    }
-
-    /**
      * HTTPIngressPath associates a path regex with a backend. Incoming urls matching the path are
      * forwarded to the backend.
      */
@@ -16966,63 +14697,8 @@ export namespace extensions {
     }
 
     /**
-     * HostPortRange defines a range of host ports that will be enabled by a policy for pods to use.
-     * It requires both the start and end to be defined. Deprecated: use HostPortRange from policy
-     * API Group instead.
-     */
-    export interface HostPortRange {
-      /**
-       * max is the end of the range, inclusive.
-       */
-      readonly max: number
-
-      /**
-       * min is the start of the range, inclusive.
-       */
-      readonly min: number
-
-    }
-
-    /**
-     * IDRange provides a min/max of an allowed range of IDs. Deprecated: use IDRange from policy
-     * API Group instead.
-     */
-    export interface IDRange {
-      /**
-       * max is the end of the range, inclusive.
-       */
-      readonly max: number
-
-      /**
-       * min is the start of the range, inclusive.
-       */
-      readonly min: number
-
-    }
-
-    /**
-     * DEPRECATED 1.9 - This group version of IPBlock is deprecated by networking/v1/IPBlock.
-     * IPBlock describes a particular CIDR (Ex. "192.168.1.1/24") that is allowed to the pods
-     * matched by a NetworkPolicySpec's podSelector. The except entry describes CIDRs that should
-     * not be included within this rule.
-     */
-    export interface IPBlock {
-      /**
-       * CIDR is a string representing the IP Block Valid examples are "192.168.1.1/24"
-       */
-      readonly cidr: string
-
-      /**
-       * Except is a slice of CIDRs that should not be included within an IP Block Valid examples
-       * are "192.168.1.1/24" Except values will be rejected if they are outside the CIDR range
-       */
-      readonly except: string[]
-
-    }
-
-    /**
-     * @deprecated extensions/v1beta1/Ingress is not supported by Kubernetes 1.16+ clusters. Use
-     * networking/v1beta1/Ingress instead.
+     * @deprecated extensions/v1beta1/Ingress is deprecated by networking/v1beta1/Ingress and not
+     * supported by Kubernetes v1.20+ clusters.
      * 
      * Ingress is a collection of rules that allow inbound connections to reach the endpoints
      * defined by a backend. An Ingress can be configured to give services externally-reachable
@@ -17198,553 +14874,37 @@ export namespace extensions {
 
     }
 
+  }
+
+}
+
+export namespace flowcontrol {
+  export namespace v1alpha1 {
     /**
-     * DEPRECATED 1.9 - This group version of NetworkPolicy is deprecated by
-     * networking/v1/NetworkPolicy. NetworkPolicy describes what network traffic is allowed for a
-     * set of Pods
+     * FlowDistinguisherMethod specifies the method of a flow distinguisher.
      */
-    export interface NetworkPolicy {
+    export interface FlowDistinguisherMethod {
       /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "extensions/v1beta1"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "NetworkPolicy"
-
-      /**
-       * Standard object's metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * Specification of the desired behavior for this NetworkPolicy.
-       */
-      readonly spec: extensions.v1beta1.NetworkPolicySpec
-
-    }
-
-    /**
-     * DEPRECATED 1.9 - This group version of NetworkPolicyEgressRule is deprecated by
-     * networking/v1/NetworkPolicyEgressRule. NetworkPolicyEgressRule describes a particular set of
-     * traffic that is allowed out of pods matched by a NetworkPolicySpec's podSelector. The traffic
-     * must match both ports and to. This type is beta-level in 1.8
-     */
-    export interface NetworkPolicyEgressRule {
-      /**
-       * List of destination ports for outgoing traffic. Each item in this list is combined using a
-       * logical OR. If this field is empty or missing, this rule matches all ports (traffic not
-       * restricted by port). If this field is present and contains at least one item, then this
-       * rule allows traffic only if the traffic matches at least one port in the list.
-       */
-      readonly ports: extensions.v1beta1.NetworkPolicyPort[]
-
-      /**
-       * List of destinations for outgoing traffic of pods selected for this rule. Items in this
-       * list are combined using a logical OR operation. If this field is empty or missing, this
-       * rule matches all destinations (traffic not restricted by destination). If this field is
-       * present and contains at least one item, this rule allows traffic only if the traffic
-       * matches at least one item in the to list.
-       */
-      readonly to: extensions.v1beta1.NetworkPolicyPeer[]
-
-    }
-
-    /**
-     * DEPRECATED 1.9 - This group version of NetworkPolicyIngressRule is deprecated by
-     * networking/v1/NetworkPolicyIngressRule. This NetworkPolicyIngressRule matches traffic if and
-     * only if the traffic matches both ports AND from.
-     */
-    export interface NetworkPolicyIngressRule {
-      /**
-       * List of sources which should be able to access the pods selected for this rule. Items in
-       * this list are combined using a logical OR operation. If this field is empty or missing,
-       * this rule matches all sources (traffic not restricted by source). If this field is present
-       * and contains at least one item, this rule allows traffic only if the traffic matches at
-       * least one item in the from list.
-       */
-      readonly from: extensions.v1beta1.NetworkPolicyPeer[]
-
-      /**
-       * List of ports which should be made accessible on the pods selected for this rule. Each item
-       * in this list is combined using a logical OR. If this field is empty or missing, this rule
-       * matches all ports (traffic not restricted by port). If this field is present and contains
-       * at least one item, then this rule allows traffic only if the traffic matches at least one
-       * port in the list.
-       */
-      readonly ports: extensions.v1beta1.NetworkPolicyPort[]
-
-    }
-
-    /**
-     * DEPRECATED 1.9 - This group version of NetworkPolicyList is deprecated by
-     * networking/v1/NetworkPolicyList. Network Policy List is a list of NetworkPolicy objects.
-     */
-    export interface NetworkPolicyList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "extensions/v1beta1"
-
-      /**
-       * Items is a list of schema objects.
-       */
-      readonly items: extensions.v1beta1.NetworkPolicy[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "NetworkPolicyList"
-
-      /**
-       * Standard list metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * DEPRECATED 1.9 - This group version of NetworkPolicyPeer is deprecated by
-     * networking/v1/NetworkPolicyPeer.
-     */
-    export interface NetworkPolicyPeer {
-      /**
-       * IPBlock defines policy on a particular IPBlock. If this field is set then neither of the
-       * other fields can be.
-       */
-      readonly ipBlock: extensions.v1beta1.IPBlock
-
-      /**
-       * Selects Namespaces using cluster-scoped labels. This field follows standard label selector
-       * semantics; if present but empty, it selects all namespaces.
-       * 
-       * If PodSelector is also set, then the NetworkPolicyPeer as a whole selects the Pods matching
-       * PodSelector in the Namespaces selected by NamespaceSelector. Otherwise it selects all Pods
-       * in the Namespaces selected by NamespaceSelector.
-       */
-      readonly namespaceSelector: meta.v1.LabelSelector
-
-      /**
-       * This is a label selector which selects Pods. This field follows standard label selector
-       * semantics; if present but empty, it selects all pods.
-       * 
-       * If NamespaceSelector is also set, then the NetworkPolicyPeer as a whole selects the Pods
-       * matching PodSelector in the Namespaces selected by NamespaceSelector. Otherwise it selects
-       * the Pods matching PodSelector in the policy's own Namespace.
-       */
-      readonly podSelector: meta.v1.LabelSelector
-
-    }
-
-    /**
-     * DEPRECATED 1.9 - This group version of NetworkPolicyPort is deprecated by
-     * networking/v1/NetworkPolicyPort.
-     */
-    export interface NetworkPolicyPort {
-      /**
-       * If specified, the port on the given protocol.  This can either be a numerical or named port
-       * on a pod.  If this field is not provided, this matches all port names and numbers. If
-       * present, only traffic on the specified protocol AND port will be matched.
-       */
-      readonly port: number | string
-
-      /**
-       * Optional.  The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified,
-       * this field defaults to TCP.
-       */
-      readonly protocol: string
-
-    }
-
-    /**
-     * DEPRECATED 1.9 - This group version of NetworkPolicySpec is deprecated by
-     * networking/v1/NetworkPolicySpec.
-     */
-    export interface NetworkPolicySpec {
-      /**
-       * List of egress rules to be applied to the selected pods. Outgoing traffic is allowed if
-       * there are no NetworkPolicies selecting the pod (and cluster policy otherwise allows the
-       * traffic), OR if the traffic matches at least one egress rule across all of the
-       * NetworkPolicy objects whose podSelector matches the pod. If this field is empty then this
-       * NetworkPolicy limits all outgoing traffic (and serves solely to ensure that the pods it
-       * selects are isolated by default). This field is beta-level in 1.8
-       */
-      readonly egress: extensions.v1beta1.NetworkPolicyEgressRule[]
-
-      /**
-       * List of ingress rules to be applied to the selected pods. Traffic is allowed to a pod if
-       * there are no NetworkPolicies selecting the pod OR if the traffic source is the pod's local
-       * node, OR if the traffic matches at least one ingress rule across all of the NetworkPolicy
-       * objects whose podSelector matches the pod. If this field is empty then this NetworkPolicy
-       * does not allow any traffic (and serves solely to ensure that the pods it selects are
-       * isolated by default).
-       */
-      readonly ingress: extensions.v1beta1.NetworkPolicyIngressRule[]
-
-      /**
-       * Selects the pods to which this NetworkPolicy object applies.  The array of ingress rules is
-       * applied to any pods selected by this field. Multiple network policies can select the same
-       * set of pods.  In this case, the ingress rules for each are combined additively. This field
-       * is NOT optional and follows standard label selector semantics. An empty podSelector matches
-       * all pods in this namespace.
-       */
-      readonly podSelector: meta.v1.LabelSelector
-
-      /**
-       * List of rule types that the NetworkPolicy relates to. Valid options are "Ingress",
-       * "Egress", or "Ingress,Egress". If this field is not specified, it will default based on the
-       * existence of Ingress or Egress rules; policies that contain an Egress section are assumed
-       * to affect Egress, and all policies (whether or not they contain an Ingress section) are
-       * assumed to affect Ingress. If you want to write an egress-only policy, you must explicitly
-       * specify policyTypes [ "Egress" ]. Likewise, if you want to write a policy that specifies
-       * that no egress is allowed, you must specify a policyTypes value that include "Egress"
-       * (since such a policy would not include an Egress section and would otherwise default to
-       * just [ "Ingress" ]). This field is beta-level in 1.8
-       */
-      readonly policyTypes: string[]
-
-    }
-
-    /**
-     * PodSecurityPolicy governs the ability to make requests that affect the Security Context that
-     * will be applied to a pod and container. Deprecated: use PodSecurityPolicy from policy API
-     * Group instead.
-     */
-    export interface PodSecurityPolicy {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "extensions/v1beta1"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "PodSecurityPolicy"
-
-      /**
-       * Standard object's metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * spec defines the policy enforced.
-       */
-      readonly spec: extensions.v1beta1.PodSecurityPolicySpec
-
-    }
-
-    /**
-     * PodSecurityPolicyList is a list of PodSecurityPolicy objects. Deprecated: use
-     * PodSecurityPolicyList from policy API Group instead.
-     */
-    export interface PodSecurityPolicyList {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "extensions/v1beta1"
-
-      /**
-       * items is a list of schema objects.
-       */
-      readonly items: extensions.v1beta1.PodSecurityPolicy[]
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "PodSecurityPolicyList"
-
-      /**
-       * Standard list metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ListMeta
-
-    }
-
-    /**
-     * PodSecurityPolicySpec defines the policy enforced. Deprecated: use PodSecurityPolicySpec from
-     * policy API Group instead.
-     */
-    export interface PodSecurityPolicySpec {
-      /**
-       * allowPrivilegeEscalation determines if a pod can request to allow privilege escalation. If
-       * unspecified, defaults to true.
-       */
-      readonly allowPrivilegeEscalation: boolean
-
-      /**
-       * AllowedCSIDrivers is a whitelist of inline CSI drivers that must be explicitly set to be
-       * embedded within a pod spec. An empty value indicates that any CSI driver can be used for
-       * inline ephemeral volumes.
-       */
-      readonly allowedCSIDrivers: extensions.v1beta1.AllowedCSIDriver[]
-
-      /**
-       * allowedCapabilities is a list of capabilities that can be requested to add to the
-       * container. Capabilities in this field may be added at the pod author's discretion. You must
-       * not list a capability in both allowedCapabilities and requiredDropCapabilities.
-       */
-      readonly allowedCapabilities: string[]
-
-      /**
-       * allowedFlexVolumes is a whitelist of allowed Flexvolumes.  Empty or nil indicates that all
-       * Flexvolumes may be used.  This parameter is effective only when the usage of the
-       * Flexvolumes is allowed in the "volumes" field.
-       */
-      readonly allowedFlexVolumes: extensions.v1beta1.AllowedFlexVolume[]
-
-      /**
-       * allowedHostPaths is a white list of allowed host paths. Empty indicates that all host paths
-       * may be used.
-       */
-      readonly allowedHostPaths: extensions.v1beta1.AllowedHostPath[]
-
-      /**
-       * AllowedProcMountTypes is a whitelist of allowed ProcMountTypes. Empty or nil indicates that
-       * only the DefaultProcMountType may be used. This requires the ProcMountType feature flag to
-       * be enabled.
-       */
-      readonly allowedProcMountTypes: string[]
-
-      /**
-       * allowedUnsafeSysctls is a list of explicitly allowed unsafe sysctls, defaults to none. Each
-       * entry is either a plain sysctl name or ends in "*" in which case it is considered as a
-       * prefix of allowed sysctls. Single * means all unsafe sysctls are allowed. Kubelet has to
-       * whitelist all allowed unsafe sysctls explicitly to avoid rejection.
-       * 
-       * Examples: e.g. "foo/*" allows "foo/bar", "foo/baz", etc. e.g. "foo.*" allows "foo.bar",
-       * "foo.baz", etc.
-       */
-      readonly allowedUnsafeSysctls: string[]
-
-      /**
-       * defaultAddCapabilities is the default set of capabilities that will be added to the
-       * container unless the pod spec specifically drops the capability.  You may not list a
-       * capability in both defaultAddCapabilities and requiredDropCapabilities. Capabilities added
-       * here are implicitly allowed, and need not be included in the allowedCapabilities list.
-       */
-      readonly defaultAddCapabilities: string[]
-
-      /**
-       * defaultAllowPrivilegeEscalation controls the default setting for whether a process can gain
-       * more privileges than its parent process.
-       */
-      readonly defaultAllowPrivilegeEscalation: boolean
-
-      /**
-       * forbiddenSysctls is a list of explicitly forbidden sysctls, defaults to none. Each entry is
-       * either a plain sysctl name or ends in "*" in which case it is considered as a prefix of
-       * forbidden sysctls. Single * means all sysctls are forbidden.
-       * 
-       * Examples: e.g. "foo/*" forbids "foo/bar", "foo/baz", etc. e.g. "foo.*" forbids "foo.bar",
-       * "foo.baz", etc.
-       */
-      readonly forbiddenSysctls: string[]
-
-      /**
-       * fsGroup is the strategy that will dictate what fs group is used by the SecurityContext.
-       */
-      readonly fsGroup: extensions.v1beta1.FSGroupStrategyOptions
-
-      /**
-       * hostIPC determines if the policy allows the use of HostIPC in the pod spec.
-       */
-      readonly hostIPC: boolean
-
-      /**
-       * hostNetwork determines if the policy allows the use of HostNetwork in the pod spec.
-       */
-      readonly hostNetwork: boolean
-
-      /**
-       * hostPID determines if the policy allows the use of HostPID in the pod spec.
-       */
-      readonly hostPID: boolean
-
-      /**
-       * hostPorts determines which host port ranges are allowed to be exposed.
-       */
-      readonly hostPorts: extensions.v1beta1.HostPortRange[]
-
-      /**
-       * privileged determines if a pod can request to be run as privileged.
-       */
-      readonly privileged: boolean
-
-      /**
-       * readOnlyRootFilesystem when set to true will force containers to run with a read only root
-       * file system.  If the container specifically requests to run with a non-read only root file
-       * system the PSP should deny the pod. If set to false the container may run with a read only
-       * root file system if it wishes but it will not be forced to.
-       */
-      readonly readOnlyRootFilesystem: boolean
-
-      /**
-       * requiredDropCapabilities are the capabilities that will be dropped from the container.
-       * These are required to be dropped and cannot be added.
-       */
-      readonly requiredDropCapabilities: string[]
-
-      /**
-       * RunAsGroup is the strategy that will dictate the allowable RunAsGroup values that may be
-       * set. If this field is omitted, the pod's RunAsGroup can take any value. This field requires
-       * the RunAsGroup feature gate to be enabled.
-       */
-      readonly runAsGroup: extensions.v1beta1.RunAsGroupStrategyOptions
-
-      /**
-       * runAsUser is the strategy that will dictate the allowable RunAsUser values that may be set.
-       */
-      readonly runAsUser: extensions.v1beta1.RunAsUserStrategyOptions
-
-      /**
-       * runtimeClass is the strategy that will dictate the allowable RuntimeClasses for a pod. If
-       * this field is omitted, the pod's runtimeClassName field is unrestricted. Enforcement of
-       * this field depends on the RuntimeClass feature gate being enabled.
-       */
-      readonly runtimeClass: extensions.v1beta1.RuntimeClassStrategyOptions
-
-      /**
-       * seLinux is the strategy that will dictate the allowable labels that may be set.
-       */
-      readonly seLinux: extensions.v1beta1.SELinuxStrategyOptions
-
-      /**
-       * supplementalGroups is the strategy that will dictate what supplemental groups are used by
-       * the SecurityContext.
-       */
-      readonly supplementalGroups: extensions.v1beta1.SupplementalGroupsStrategyOptions
-
-      /**
-       * volumes is a white list of allowed volume plugins. Empty indicates that no volumes may be
-       * used. To allow all volumes you may use '*'.
-       */
-      readonly volumes: string[]
-
-    }
-
-    /**
-     * @deprecated extensions/v1beta1/ReplicaSet is not supported by Kubernetes 1.16+ clusters. Use
-     * apps/v1/ReplicaSet instead.
-     * 
-     * ReplicaSet ensures that a specified number of pod replicas are running at any given time.
-     */
-    export interface ReplicaSet {
-      /**
-       * APIVersion defines the versioned schema of this representation of an object. Servers should
-       * convert recognized schemas to the latest internal value, and may reject unrecognized
-       * values. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-       */
-      readonly apiVersion: "extensions/v1beta1"
-
-      /**
-       * Kind is a string value representing the REST resource this object represents. Servers may
-       * infer this from the endpoint the client submits requests to. Cannot be updated. In
-       * CamelCase. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-       */
-      readonly kind: "ReplicaSet"
-
-      /**
-       * If the Labels of a ReplicaSet are empty, they are defaulted to be the same as the Pod(s)
-       * that the ReplicaSet manages. Standard object's metadata. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-       */
-      readonly metadata: meta.v1.ObjectMeta
-
-      /**
-       * Spec defines the specification of the desired behavior of the ReplicaSet. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-       */
-      readonly spec: extensions.v1beta1.ReplicaSetSpec
-
-      /**
-       * Status is the most recently observed status of the ReplicaSet. This data may be out of date
-       * by some window of time. Populated by the system. Read-only. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-       */
-      readonly status: extensions.v1beta1.ReplicaSetStatus
-
-    }
-
-    /**
-     * ReplicaSetCondition describes the state of a replica set at a certain point.
-     */
-    export interface ReplicaSetCondition {
-      /**
-       * The last time the condition transitioned from one status to another.
-       */
-      readonly lastTransitionTime: string
-
-      /**
-       * A human readable message indicating details about the transition.
-       */
-      readonly message: string
-
-      /**
-       * The reason for the condition's last transition.
-       */
-      readonly reason: string
-
-      /**
-       * Status of the condition, one of True, False, Unknown.
-       */
-      readonly status: string
-
-      /**
-       * Type of replica set condition.
+       * `type` is the type of flow distinguisher method The supported types are "ByUser" and
+       * "ByNamespace". Required.
        */
       readonly type: string
 
     }
 
     /**
-     * ReplicaSetList is a collection of ReplicaSets.
+     * FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of
+     * inbound API requests with similar attributes and is identified by a pair of strings: the name
+     * of the FlowSchema and a "flow distinguisher".
      */
-    export interface ReplicaSetList {
+    export interface FlowSchema {
       /**
        * APIVersion defines the versioned schema of this representation of an object. Servers should
        * convert recognized schemas to the latest internal value, and may reject unrecognized
        * values. More info:
        * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
        */
-      readonly apiVersion: "extensions/v1beta1"
-
-      /**
-       * List of ReplicaSets. More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller
-       */
-      readonly items: extensions.v1beta1.ReplicaSet[]
+      readonly apiVersion: "flowcontrol.apiserver.k8s.io/v1alpha1"
 
       /**
        * Kind is a string value representing the REST resource this object represents. Servers may
@@ -17752,235 +14912,269 @@ export namespace extensions {
        * CamelCase. More info:
        * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
        */
-      readonly kind: "ReplicaSetList"
+      readonly kind: "FlowSchema"
 
       /**
-       * Standard list metadata. More info:
+       * `metadata` is the standard object's metadata. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+       */
+      readonly metadata: meta.v1.ObjectMeta
+
+      /**
+       * `spec` is the specification of the desired behavior of a FlowSchema. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+       */
+      readonly spec: flowcontrol.v1alpha1.FlowSchemaSpec
+
+      /**
+       * `status` is the current status of a FlowSchema. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
+       */
+      readonly status: flowcontrol.v1alpha1.FlowSchemaStatus
+
+    }
+
+    /**
+     * FlowSchemaCondition describes conditions for a FlowSchema.
+     */
+    export interface FlowSchemaCondition {
+      /**
+       * `lastTransitionTime` is the last time the condition transitioned from one status to
+       * another.
+       */
+      readonly lastTransitionTime: string
+
+      /**
+       * `message` is a human-readable message indicating details about last transition.
+       */
+      readonly message: string
+
+      /**
+       * `reason` is a unique, one-word, CamelCase reason for the condition's last transition.
+       */
+      readonly reason: string
+
+      /**
+       * `status` is the status of the condition. Can be True, False, Unknown. Required.
+       */
+      readonly status: string
+
+      /**
+       * `type` is the type of the condition. Required.
+       */
+      readonly type: string
+
+    }
+
+    /**
+     * FlowSchemaList is a list of FlowSchema objects.
+     */
+    export interface FlowSchemaList {
+      /**
+       * APIVersion defines the versioned schema of this representation of an object. Servers should
+       * convert recognized schemas to the latest internal value, and may reject unrecognized
+       * values. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+       */
+      readonly apiVersion: "flowcontrol.apiserver.k8s.io/v1alpha1"
+
+      /**
+       * `items` is a list of FlowSchemas.
+       */
+      readonly items: flowcontrol.v1alpha1.FlowSchema[]
+
+      /**
+       * Kind is a string value representing the REST resource this object represents. Servers may
+       * infer this from the endpoint the client submits requests to. Cannot be updated. In
+       * CamelCase. More info:
        * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+       */
+      readonly kind: "FlowSchemaList"
+
+      /**
+       * `metadata` is the standard list metadata. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
        */
       readonly metadata: meta.v1.ListMeta
 
     }
 
     /**
-     * ReplicaSetSpec is the specification of a ReplicaSet.
+     * FlowSchemaSpec describes how the FlowSchema's specification looks like.
      */
-    export interface ReplicaSetSpec {
+    export interface FlowSchemaSpec {
       /**
-       * Minimum number of seconds for which a newly created pod should be ready without any of its
-       * container crashing, for it to be considered available. Defaults to 0 (pod will be
-       * considered available as soon as it is ready)
+       * `distinguisherMethod` defines how to compute the flow distinguisher for requests that match
+       * this schema. `nil` specifies that the distinguisher is disabled and thus will always be the
+       * empty string.
        */
-      readonly minReadySeconds: number
+      readonly distinguisherMethod: flowcontrol.v1alpha1.FlowDistinguisherMethod
 
       /**
-       * Replicas is the number of desired replicas. This is a pointer to distinguish between
-       * explicit zero and unspecified. Defaults to 1. More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller
+       * `matchingPrecedence` is used to choose among the FlowSchemas that match a given request.
+       * The chosen FlowSchema is among those with the numerically lowest (which we take to be
+       * logically highest) MatchingPrecedence.  Each MatchingPrecedence value must be non-negative.
+       * Note that if the precedence is not specified or zero, it will be set to 1000 as default.
        */
-      readonly replicas: number
+      readonly matchingPrecedence: number
 
       /**
-       * Selector is a label query over pods that should match the replica count. If the selector is
-       * empty, it is defaulted to the labels present on the pod template. Label keys and values
-       * that must match in order to be controlled by this replica set. More info:
-       * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
+       * `priorityLevelConfiguration` should reference a PriorityLevelConfiguration in the cluster.
+       * If the reference cannot be resolved, the FlowSchema will be ignored and marked as invalid
+       * in its status. Required.
        */
-      readonly selector: meta.v1.LabelSelector
+      readonly priorityLevelConfiguration: flowcontrol.v1alpha1.PriorityLevelConfigurationReference
 
       /**
-       * Template is the object that describes the pod that will be created if insufficient replicas
-       * are detected. More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template
+       * `rules` describes which requests will match this flow schema. This FlowSchema matches a
+       * request if and only if at least one member of rules matches the request. if it is an empty
+       * slice, there will be no requests matching the FlowSchema.
        */
-      readonly template: core.v1.PodTemplateSpec
+      readonly rules: flowcontrol.v1alpha1.PolicyRulesWithSubjects[]
 
     }
 
     /**
-     * ReplicaSetStatus represents the current status of a ReplicaSet.
+     * FlowSchemaStatus represents the current state of a FlowSchema.
      */
-    export interface ReplicaSetStatus {
+    export interface FlowSchemaStatus {
       /**
-       * The number of available replicas (ready for at least minReadySeconds) for this replica set.
+       * `conditions` is a list of the current states of FlowSchema.
        */
-      readonly availableReplicas: number
-
-      /**
-       * Represents the latest available observations of a replica set's current state.
-       */
-      readonly conditions: extensions.v1beta1.ReplicaSetCondition[]
-
-      /**
-       * The number of pods that have labels matching the labels of the pod template of the
-       * replicaset.
-       */
-      readonly fullyLabeledReplicas: number
-
-      /**
-       * ObservedGeneration reflects the generation of the most recently observed ReplicaSet.
-       */
-      readonly observedGeneration: number
-
-      /**
-       * The number of ready replicas for this replica set.
-       */
-      readonly readyReplicas: number
-
-      /**
-       * Replicas is the most recently oberved number of replicas. More info:
-       * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller
-       */
-      readonly replicas: number
+      readonly conditions: flowcontrol.v1alpha1.FlowSchemaCondition[]
 
     }
 
     /**
-     * DEPRECATED.
+     * GroupSubject holds detailed information for group-kind subject.
      */
-    export interface RollbackConfig {
+    export interface GroupSubject {
       /**
-       * The revision to rollback to. If set to 0, rollback to the last revision.
+       * name is the user group that matches, or "*" to match all user groups. See
+       * https://github.com/kubernetes/apiserver/blob/master/pkg/authentication/user/user.go for
+       * some well-known group names. Required.
        */
-      readonly revision: number
+      readonly name: string
 
     }
 
     /**
-     * Spec to control the desired behavior of daemon set rolling update.
+     * LimitResponse defines how to handle requests that can not be executed right now.
      */
-    export interface RollingUpdateDaemonSet {
+    export interface LimitResponse {
       /**
-       * The maximum number of DaemonSet pods that can be unavailable during the update. Value can
-       * be an absolute number (ex: 5) or a percentage of total number of DaemonSet pods at the
-       * start of the update (ex: 10%). Absolute number is calculated from percentage by rounding
-       * up. This cannot be 0. Default value is 1. Example: when this is set to 30%, at most 30% of
-       * the total number of nodes that should be running the daemon pod (i.e.
-       * status.desiredNumberScheduled) can have their pods stopped for an update at any given time.
-       * The update starts by stopping at most 30% of those DaemonSet pods and then brings up new
-       * DaemonSet pods in their place. Once the new pods are available, it then proceeds onto other
-       * DaemonSet pods, thus ensuring that at least 70% of original number of DaemonSet pods are
-       * available at all times during the update.
+       * `queuing` holds the configuration parameters for queuing. This field may be non-empty only
+       * if `type` is `"Queue"`.
        */
-      readonly maxUnavailable: number | string
+      readonly queuing: flowcontrol.v1alpha1.QueuingConfiguration
+
+      /**
+       * `type` is "Queue" or "Reject". "Queue" means that requests that can not be executed upon
+       * arrival are held in a queue until they can be executed or a queuing limit is reached.
+       * "Reject" means that requests that can not be executed upon arrival are rejected. Required.
+       */
+      readonly type: string
 
     }
 
     /**
-     * Spec to control the desired behavior of rolling update.
+     * LimitedPriorityLevelConfiguration specifies how to handle requests that are subject to
+     * limits. It addresses two issues:
+     *  * How are requests for this priority level limited?
+     *  * What should be done with requests that exceed the limit?
      */
-    export interface RollingUpdateDeployment {
+    export interface LimitedPriorityLevelConfiguration {
       /**
-       * The maximum number of pods that can be scheduled above the desired number of pods. Value
-       * can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not
-       * be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up.
-       * By default, a value of 1 is used. Example: when this is set to 30%, the new RC can be
-       * scaled up immediately when the rolling update starts, such that the total number of old and
-       * new pods do not exceed 130% of desired pods. Once old pods have been killed, new RC can be
-       * scaled up further, ensuring that total number of pods running at any time during the update
-       * is at most 130% of desired pods.
+       * `assuredConcurrencyShares` (ACS) configures the execution limit, which is a limit on the
+       * number of requests of this priority level that may be exeucting at a given time.  ACS must
+       * be a positive number. The server's concurrency limit (SCL) is divided among the
+       * concurrency-controlled priority levels in proportion to their assured concurrency shares.
+       * This produces the assured concurrency value (ACV) --- the number of requests that may be
+       * executing at a time --- for each such priority level:
+       * 
+       *             ACV(l) = ceil( SCL * ACS(l) / ( sum[priority levels k] ACS(k) ) )
+       * 
+       * bigger numbers of ACS mean more reserved concurrent requests (at the expense of every other
+       * PL). This field has a default value of 30.
        */
-      readonly maxSurge: number | string
+      readonly assuredConcurrencyShares: number
 
       /**
-       * The maximum number of pods that can be unavailable during the update. Value can be an
-       * absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is
-       * calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. By
-       * default, a fixed value of 1 is used. Example: when this is set to 30%, the old RC can be
-       * scaled down to 70% of desired pods immediately when the rolling update starts. Once new
-       * pods are ready, old RC can be scaled down further, followed by scaling up the new RC,
-       * ensuring that the total number of pods available at all times during the update is at least
-       * 70% of desired pods.
+       * `limitResponse` indicates what to do with requests that can not be executed right now
        */
-      readonly maxUnavailable: number | string
+      readonly limitResponse: flowcontrol.v1alpha1.LimitResponse
 
     }
 
     /**
-     * RunAsGroupStrategyOptions defines the strategy type and any options used to create the
-     * strategy. Deprecated: use RunAsGroupStrategyOptions from policy API Group instead.
+     * NonResourcePolicyRule is a predicate that matches non-resource requests according to their
+     * verb and the target non-resource URL. A NonResourcePolicyRule matches a request if and only
+     * if both (a) at least one member of verbs matches the request and (b) at least one member of
+     * nonResourceURLs matches the request.
      */
-    export interface RunAsGroupStrategyOptions {
+    export interface NonResourcePolicyRule {
       /**
-       * ranges are the allowed ranges of gids that may be used. If you would like to force a single
-       * gid then supply a single range with the same start and end. Required for MustRunAs.
+       * `nonResourceURLs` is a set of url prefixes that a user should have access to and may not be
+       * empty. For example:
+       *   - "/healthz" is legal
+       *   - "/hea*" is illegal
+       *   - "/hea" is legal but matches nothing
+       *   - "/hea/*" also matches nothing
+       *   - "/healthz/*" matches all per-component health checks.
+       * "*" matches all non-resource urls. if it is present, it must be the only entry. Required.
        */
-      readonly ranges: extensions.v1beta1.IDRange[]
+      readonly nonResourceURLs: string[]
 
       /**
-       * rule is the strategy that will dictate the allowable RunAsGroup values that may be set.
+       * `verbs` is a list of matching verbs and may not be empty. "*" matches all verbs. If it is
+       * present, it must be the only entry. Required.
        */
-      readonly rule: string
+      readonly verbs: string[]
 
     }
 
     /**
-     * RunAsUserStrategyOptions defines the strategy type and any options used to create the
-     * strategy. Deprecated: use RunAsUserStrategyOptions from policy API Group instead.
+     * PolicyRulesWithSubjects prescribes a test that applies to a request to an apiserver. The test
+     * considers the subject making the request, the verb being requested, and the resource to be
+     * acted upon. This PolicyRulesWithSubjects matches a request if and only if both (a) at least
+     * one member of subjects matches the request and (b) at least one member of resourceRules or
+     * nonResourceRules matches the request.
      */
-    export interface RunAsUserStrategyOptions {
+    export interface PolicyRulesWithSubjects {
       /**
-       * ranges are the allowed ranges of uids that may be used. If you would like to force a single
-       * uid then supply a single range with the same start and end. Required for MustRunAs.
+       * `nonResourceRules` is a list of NonResourcePolicyRules that identify matching requests
+       * according to their verb and the target non-resource URL.
        */
-      readonly ranges: extensions.v1beta1.IDRange[]
+      readonly nonResourceRules: flowcontrol.v1alpha1.NonResourcePolicyRule[]
 
       /**
-       * rule is the strategy that will dictate the allowable RunAsUser values that may be set.
+       * `resourceRules` is a slice of ResourcePolicyRules that identify matching requests according
+       * to their verb and the target resource. At least one of `resourceRules` and
+       * `nonResourceRules` has to be non-empty.
        */
-      readonly rule: string
+      readonly resourceRules: flowcontrol.v1alpha1.ResourcePolicyRule[]
+
+      /**
+       * subjects is the list of normal user, serviceaccount, or group that this rule cares about.
+       * There must be at least one member in this slice. A slice that includes both the
+       * system:authenticated and system:unauthenticated user groups matches every request.
+       * Required.
+       */
+      readonly subjects: flowcontrol.v1alpha1.Subject[]
 
     }
 
     /**
-     * RuntimeClassStrategyOptions define the strategy that will dictate the allowable
-     * RuntimeClasses for a pod.
+     * PriorityLevelConfiguration represents the configuration of a priority level.
      */
-    export interface RuntimeClassStrategyOptions {
-      /**
-       * allowedRuntimeClassNames is a whitelist of RuntimeClass names that may be specified on a
-       * pod. A value of "*" means that any RuntimeClass name is allowed, and must be the only item
-       * in the list. An empty list requires the RuntimeClassName field to be unset.
-       */
-      readonly allowedRuntimeClassNames: string[]
-
-      /**
-       * defaultRuntimeClassName is the default RuntimeClassName to set on the pod. The default MUST
-       * be allowed by the allowedRuntimeClassNames list. A value of nil does not mutate the Pod.
-       */
-      readonly defaultRuntimeClassName: string
-
-    }
-
-    /**
-     * SELinuxStrategyOptions defines the strategy type and any options used to create the strategy.
-     * Deprecated: use SELinuxStrategyOptions from policy API Group instead.
-     */
-    export interface SELinuxStrategyOptions {
-      /**
-       * rule is the strategy that will dictate the allowable labels that may be set.
-       */
-      readonly rule: string
-
-      /**
-       * seLinuxOptions required to run as; required for MustRunAs More info:
-       * https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
-       */
-      readonly seLinuxOptions: core.v1.SELinuxOptions
-
-    }
-
-    /**
-     * represents a scaling request for a resource.
-     */
-    export interface Scale {
+    export interface PriorityLevelConfiguration {
       /**
        * APIVersion defines the versioned schema of this representation of an object. Servers should
        * convert recognized schemas to the latest internal value, and may reject unrecognized
        * values. More info:
        * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
        */
-      readonly apiVersion: string
+      readonly apiVersion: "flowcontrol.apiserver.k8s.io/v1alpha1"
 
       /**
        * Kind is a string value representing the REST resource this object represents. Servers may
@@ -17988,84 +15182,263 @@ export namespace extensions {
        * CamelCase. More info:
        * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
        */
-      readonly kind: string
+      readonly kind: "PriorityLevelConfiguration"
 
       /**
-       * Standard object metadata; More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.
+       * `metadata` is the standard object's metadata. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
        */
       readonly metadata: meta.v1.ObjectMeta
 
       /**
-       * defines the behavior of the scale. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
+       * `spec` is the specification of the desired behavior of a "request-priority". More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
        */
-      readonly spec: extensions.v1beta1.ScaleSpec
+      readonly spec: flowcontrol.v1alpha1.PriorityLevelConfigurationSpec
 
       /**
-       * current status of the scale. More info:
-       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.
-       * Read-only.
+       * `status` is the current status of a "request-priority". More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
        */
-      readonly status: extensions.v1beta1.ScaleStatus
+      readonly status: flowcontrol.v1alpha1.PriorityLevelConfigurationStatus
 
     }
 
     /**
-     * describes the attributes of a scale subresource
+     * PriorityLevelConfigurationCondition defines the condition of priority level.
      */
-    export interface ScaleSpec {
+    export interface PriorityLevelConfigurationCondition {
       /**
-       * desired number of instances for the scaled object.
+       * `lastTransitionTime` is the last time the condition transitioned from one status to
+       * another.
        */
-      readonly replicas: number
+      readonly lastTransitionTime: string
+
+      /**
+       * `message` is a human-readable message indicating details about last transition.
+       */
+      readonly message: string
+
+      /**
+       * `reason` is a unique, one-word, CamelCase reason for the condition's last transition.
+       */
+      readonly reason: string
+
+      /**
+       * `status` is the status of the condition. Can be True, False, Unknown. Required.
+       */
+      readonly status: string
+
+      /**
+       * `type` is the type of the condition. Required.
+       */
+      readonly type: string
 
     }
 
     /**
-     * represents the current status of a scale subresource.
+     * PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects.
      */
-    export interface ScaleStatus {
+    export interface PriorityLevelConfigurationList {
       /**
-       * actual number of observed instances of the scaled object.
+       * APIVersion defines the versioned schema of this representation of an object. Servers should
+       * convert recognized schemas to the latest internal value, and may reject unrecognized
+       * values. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
        */
-      readonly replicas: number
+      readonly apiVersion: "flowcontrol.apiserver.k8s.io/v1alpha1"
 
       /**
-       * label query over pods that should match the replicas count. More info:
-       * http://kubernetes.io/docs/user-guide/labels#label-selectors
+       * `items` is a list of request-priorities.
        */
-      readonly selector: {[key: string]: string}
+      readonly items: flowcontrol.v1alpha1.PriorityLevelConfiguration[]
 
       /**
-       * label selector for pods that should match the replicas count. This is a serializated
-       * version of both map-based and more expressive set-based selectors. This is done to avoid
-       * introspection in the clients. The string will be in the same format as the query-param
-       * syntax. If the target type only supports map-based selectors, both this field and map-based
-       * selector field are populated. More info:
-       * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
+       * Kind is a string value representing the REST resource this object represents. Servers may
+       * infer this from the endpoint the client submits requests to. Cannot be updated. In
+       * CamelCase. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
        */
-      readonly targetSelector: string
+      readonly kind: "PriorityLevelConfigurationList"
+
+      /**
+       * `metadata` is the standard object's metadata. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+       */
+      readonly metadata: meta.v1.ListMeta
 
     }
 
     /**
-     * SupplementalGroupsStrategyOptions defines the strategy type and options used to create the
-     * strategy. Deprecated: use SupplementalGroupsStrategyOptions from policy API Group instead.
+     * PriorityLevelConfigurationReference contains information that points to the
+     * "request-priority" being used.
      */
-    export interface SupplementalGroupsStrategyOptions {
+    export interface PriorityLevelConfigurationReference {
       /**
-       * ranges are the allowed ranges of supplemental groups.  If you would like to force a single
-       * supplemental group then supply a single range with the same start and end. Required for
-       * MustRunAs.
+       * `name` is the name of the priority level configuration being referenced Required.
        */
-      readonly ranges: extensions.v1beta1.IDRange[]
+      readonly name: string
+
+    }
+
+    /**
+     * PriorityLevelConfigurationSpec specifies the configuration of a priority level.
+     */
+    export interface PriorityLevelConfigurationSpec {
+      /**
+       * `limited` specifies how requests are handled for a Limited priority level. This field must
+       * be non-empty if and only if `type` is `"Limited"`.
+       */
+      readonly limited: flowcontrol.v1alpha1.LimitedPriorityLevelConfiguration
 
       /**
-       * rule is the strategy that will dictate what supplemental groups is used in the
-       * SecurityContext.
+       * `type` indicates whether this priority level is subject to limitation on request execution.
+       * A value of `"Exempt"` means that requests of this priority level are not subject to a limit
+       * (and thus are never queued) and do not detract from the capacity made available to other
+       * priority levels.  A value of `"Limited"` means that (a) requests of this priority level
+       * _are_ subject to limits and (b) some of the server's limited capacity is made available
+       * exclusively to this priority level. Required.
        */
-      readonly rule: string
+      readonly type: string
+
+    }
+
+    /**
+     * PriorityLevelConfigurationStatus represents the current state of a "request-priority".
+     */
+    export interface PriorityLevelConfigurationStatus {
+      /**
+       * `conditions` is the current state of "request-priority".
+       */
+      readonly conditions: flowcontrol.v1alpha1.PriorityLevelConfigurationCondition[]
+
+    }
+
+    /**
+     * QueuingConfiguration holds the configuration parameters for queuing
+     */
+    export interface QueuingConfiguration {
+      /**
+       * `handSize` is a small positive number that configures the shuffle sharding of requests into
+       * queues.  When enqueuing a request at this priority level the request's flow identifier (a
+       * string pair) is hashed and the hash value is used to shuffle the list of queues and deal a
+       * hand of the size specified here.  The request is put into one of the shortest queues in
+       * that hand. `handSize` must be no larger than `queues`, and should be significantly smaller
+       * (so that a few heavy flows do not saturate most of the queues).  See the user-facing
+       * documentation for more extensive guidance on setting this field.  This field has a default
+       * value of 8.
+       */
+      readonly handSize: number
+
+      /**
+       * `queueLengthLimit` is the maximum number of requests allowed to be waiting in a given queue
+       * of this priority level at a time; excess requests are rejected.  This value must be
+       * positive.  If not specified, it will be defaulted to 50.
+       */
+      readonly queueLengthLimit: number
+
+      /**
+       * `queues` is the number of queues for this priority level. The queues exist independently at
+       * each apiserver. The value must be positive.  Setting it to 1 effectively precludes
+       * shufflesharding and thus makes the distinguisher method of associated flow schemas
+       * irrelevant.  This field has a default value of 64.
+       */
+      readonly queues: number
+
+    }
+
+    /**
+     * ResourcePolicyRule is a predicate that matches some resource requests, testing the request's
+     * verb and the target resource. A ResourcePolicyRule matches a resource request if and only if:
+     * (a) at least one member of verbs matches the request, (b) at least one member of apiGroups
+     * matches the request, (c) at least one member of resources matches the request, and (d) least
+     * one member of namespaces matches the request.
+     */
+    export interface ResourcePolicyRule {
+      /**
+       * `apiGroups` is a list of matching API groups and may not be empty. "*" matches all API
+       * groups and, if present, must be the only entry. Required.
+       */
+      readonly apiGroups: string[]
+
+      /**
+       * `clusterScope` indicates whether to match requests that do not specify a namespace (which
+       * happens either because the resource is not namespaced or the request targets all
+       * namespaces). If this field is omitted or false then the `namespaces` field must contain a
+       * non-empty list.
+       */
+      readonly clusterScope: boolean
+
+      /**
+       * `namespaces` is a list of target namespaces that restricts matches.  A request that
+       * specifies a target namespace matches only if either (a) this list contains that target
+       * namespace or (b) this list contains "*".  Note that "*" matches any specified namespace but
+       * does not match a request that _does not specify_ a namespace (see the `clusterScope` field
+       * for that). This list may be empty, but only if `clusterScope` is true.
+       */
+      readonly namespaces: string[]
+
+      /**
+       * `resources` is a list of matching resources (i.e., lowercase and plural) with, if desired,
+       * subresource.  For example, [ "services", "nodes/status" ].  This list may not be empty. "*"
+       * matches all resources and, if present, must be the only entry. Required.
+       */
+      readonly resources: string[]
+
+      /**
+       * `verbs` is a list of matching verbs and may not be empty. "*" matches all verbs and, if
+       * present, must be the only entry. Required.
+       */
+      readonly verbs: string[]
+
+    }
+
+    /**
+     * ServiceAccountSubject holds detailed information for service-account-kind subject.
+     */
+    export interface ServiceAccountSubject {
+      /**
+       * `name` is the name of matching ServiceAccount objects, or "*" to match regardless of name.
+       * Required.
+       */
+      readonly name: string
+
+      /**
+       * `namespace` is the namespace of matching ServiceAccount objects. Required.
+       */
+      readonly namespace: string
+
+    }
+
+    /**
+     * Subject matches the originator of a request, as identified by the request authentication
+     * system. There are three ways of matching an originator; by user, group, or service account.
+     */
+    export interface Subject {
+      
+      readonly group: flowcontrol.v1alpha1.GroupSubject
+
+      /**
+       * Required
+       */
+      readonly kind: string
+
+      
+      readonly serviceAccount: flowcontrol.v1alpha1.ServiceAccountSubject
+
+      
+      readonly user: flowcontrol.v1alpha1.UserSubject
+
+    }
+
+    /**
+     * UserSubject holds detailed information for user-kind subject.
+     */
+    export interface UserSubject {
+      /**
+       * `name` is the username that matches, or "*" to match all usernames. Required.
+       */
+      readonly name: string
 
     }
 
@@ -19933,9 +17306,8 @@ export namespace policy {
       readonly expectedPods: number
 
       /**
-       * Most recent generation observed when updating this PDB status. PodDisruptionsAllowed and
-       * other status information is valid only if observedGeneration equals to PDB's object
-       * generation.
+       * Most recent generation observed when updating this PDB status. DisruptionsAllowed and other
+       * status information is valid only if observedGeneration equals to PDB's object generation.
        */
       readonly observedGeneration: number
 
@@ -20675,7 +18047,8 @@ export namespace rbac {
 
     /**
      * ClusterRole is a cluster level, logical grouping of PolicyRules that can be referenced as a
-     * unit by a RoleBinding or ClusterRoleBinding.
+     * unit by a RoleBinding or ClusterRoleBinding. Deprecated in v1.17 in favor of
+     * rbac.authorization.k8s.io/v1 ClusterRole, and will no longer be served in v1.20.
      */
     export interface ClusterRole {
       /**
@@ -20715,7 +18088,9 @@ export namespace rbac {
 
     /**
      * ClusterRoleBinding references a ClusterRole, but not contain it.  It can reference a
-     * ClusterRole in the global namespace, and adds who information via Subject.
+     * ClusterRole in the global namespace, and adds who information via Subject. Deprecated in
+     * v1.17 in favor of rbac.authorization.k8s.io/v1 ClusterRoleBinding, and will no longer be
+     * served in v1.20.
      */
     export interface ClusterRoleBinding {
       /**
@@ -20753,7 +18128,8 @@ export namespace rbac {
     }
 
     /**
-     * ClusterRoleBindingList is a collection of ClusterRoleBindings
+     * ClusterRoleBindingList is a collection of ClusterRoleBindings. Deprecated in v1.17 in favor
+     * of rbac.authorization.k8s.io/v1 ClusterRoleBindings, and will no longer be served in v1.20.
      */
     export interface ClusterRoleBindingList {
       /**
@@ -20785,7 +18161,8 @@ export namespace rbac {
     }
 
     /**
-     * ClusterRoleList is a collection of ClusterRoles
+     * ClusterRoleList is a collection of ClusterRoles. Deprecated in v1.17 in favor of
+     * rbac.authorization.k8s.io/v1 ClusterRoles, and will no longer be served in v1.20.
      */
     export interface ClusterRoleList {
       /**
@@ -20860,7 +18237,8 @@ export namespace rbac {
 
     /**
      * Role is a namespaced, logical grouping of PolicyRules that can be referenced as a unit by a
-     * RoleBinding.
+     * RoleBinding. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 Role, and will no
+     * longer be served in v1.20.
      */
     export interface Role {
       /**
@@ -20895,7 +18273,8 @@ export namespace rbac {
      * RoleBinding references a role, but does not contain it.  It can reference a Role in the same
      * namespace or a ClusterRole in the global namespace. It adds who information via Subjects and
      * namespace information by which namespace it exists in.  RoleBindings in a given namespace
-     * only have effect in that namespace.
+     * only have effect in that namespace. Deprecated in v1.17 in favor of
+     * rbac.authorization.k8s.io/v1 RoleBinding, and will no longer be served in v1.20.
      */
     export interface RoleBinding {
       /**
@@ -20933,7 +18312,8 @@ export namespace rbac {
     }
 
     /**
-     * RoleBindingList is a collection of RoleBindings
+     * RoleBindingList is a collection of RoleBindings Deprecated in v1.17 in favor of
+     * rbac.authorization.k8s.io/v1 RoleBindingList, and will no longer be served in v1.20.
      */
     export interface RoleBindingList {
       /**
@@ -20965,7 +18345,8 @@ export namespace rbac {
     }
 
     /**
-     * RoleList is a collection of Roles
+     * RoleList is a collection of Roles. Deprecated in v1.17 in favor of
+     * rbac.authorization.k8s.io/v1 RoleList, and will no longer be served in v1.20.
      */
     export interface RoleList {
       /**
@@ -21068,7 +18449,8 @@ export namespace rbac {
 
     /**
      * ClusterRole is a cluster level, logical grouping of PolicyRules that can be referenced as a
-     * unit by a RoleBinding or ClusterRoleBinding.
+     * unit by a RoleBinding or ClusterRoleBinding. Deprecated in v1.17 in favor of
+     * rbac.authorization.k8s.io/v1 ClusterRole, and will no longer be served in v1.20.
      */
     export interface ClusterRole {
       /**
@@ -21108,7 +18490,9 @@ export namespace rbac {
 
     /**
      * ClusterRoleBinding references a ClusterRole, but not contain it.  It can reference a
-     * ClusterRole in the global namespace, and adds who information via Subject.
+     * ClusterRole in the global namespace, and adds who information via Subject. Deprecated in
+     * v1.17 in favor of rbac.authorization.k8s.io/v1 ClusterRoleBinding, and will no longer be
+     * served in v1.20.
      */
     export interface ClusterRoleBinding {
       /**
@@ -21146,7 +18530,9 @@ export namespace rbac {
     }
 
     /**
-     * ClusterRoleBindingList is a collection of ClusterRoleBindings
+     * ClusterRoleBindingList is a collection of ClusterRoleBindings. Deprecated in v1.17 in favor
+     * of rbac.authorization.k8s.io/v1 ClusterRoleBindingList, and will no longer be served in
+     * v1.20.
      */
     export interface ClusterRoleBindingList {
       /**
@@ -21178,7 +18564,8 @@ export namespace rbac {
     }
 
     /**
-     * ClusterRoleList is a collection of ClusterRoles
+     * ClusterRoleList is a collection of ClusterRoles. Deprecated in v1.17 in favor of
+     * rbac.authorization.k8s.io/v1 ClusterRoles, and will no longer be served in v1.20.
      */
     export interface ClusterRoleList {
       /**
@@ -21253,7 +18640,8 @@ export namespace rbac {
 
     /**
      * Role is a namespaced, logical grouping of PolicyRules that can be referenced as a unit by a
-     * RoleBinding.
+     * RoleBinding. Deprecated in v1.17 in favor of rbac.authorization.k8s.io/v1 Role, and will no
+     * longer be served in v1.20.
      */
     export interface Role {
       /**
@@ -21288,7 +18676,8 @@ export namespace rbac {
      * RoleBinding references a role, but does not contain it.  It can reference a Role in the same
      * namespace or a ClusterRole in the global namespace. It adds who information via Subjects and
      * namespace information by which namespace it exists in.  RoleBindings in a given namespace
-     * only have effect in that namespace.
+     * only have effect in that namespace. Deprecated in v1.17 in favor of
+     * rbac.authorization.k8s.io/v1 RoleBinding, and will no longer be served in v1.20.
      */
     export interface RoleBinding {
       /**
@@ -21326,7 +18715,8 @@ export namespace rbac {
     }
 
     /**
-     * RoleBindingList is a collection of RoleBindings
+     * RoleBindingList is a collection of RoleBindings Deprecated in v1.17 in favor of
+     * rbac.authorization.k8s.io/v1 RoleBindingList, and will no longer be served in v1.20.
      */
     export interface RoleBindingList {
       /**
@@ -21358,7 +18748,8 @@ export namespace rbac {
     }
 
     /**
-     * RoleList is a collection of Roles
+     * RoleList is a collection of Roles Deprecated in v1.17 in favor of
+     * rbac.authorization.k8s.io/v1 RoleList, and will no longer be served in v1.20.
      */
     export interface RoleList {
       /**
@@ -21831,6 +19222,130 @@ export namespace settings {
 export namespace storage {
   export namespace v1 {
     /**
+     * CSINode holds information about all CSI drivers installed on a node. CSI drivers do not need
+     * to create the CSINode object directly. As long as they use the node-driver-registrar sidecar
+     * container, the kubelet will automatically populate the CSINode object for the CSI driver as
+     * part of kubelet plugin registration. CSINode has the same name as a node. If the object is
+     * missing, it means either there are no CSI Drivers available on the node, or the Kubelet
+     * version is low enough that it doesn't create this object. CSINode has an OwnerReference that
+     * points to the corresponding node object.
+     */
+    export interface CSINode {
+      /**
+       * APIVersion defines the versioned schema of this representation of an object. Servers should
+       * convert recognized schemas to the latest internal value, and may reject unrecognized
+       * values. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+       */
+      readonly apiVersion: "storage.k8s.io/v1"
+
+      /**
+       * Kind is a string value representing the REST resource this object represents. Servers may
+       * infer this from the endpoint the client submits requests to. Cannot be updated. In
+       * CamelCase. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+       */
+      readonly kind: "CSINode"
+
+      /**
+       * metadata.name must be the Kubernetes node name.
+       */
+      readonly metadata: meta.v1.ObjectMeta
+
+      /**
+       * spec is the specification of CSINode
+       */
+      readonly spec: storage.v1.CSINodeSpec
+
+    }
+
+    /**
+     * CSINodeDriver holds information about the specification of one CSI driver installed on a node
+     */
+    export interface CSINodeDriver {
+      /**
+       * allocatable represents the volume resources of a node that are available for scheduling.
+       * This field is beta.
+       */
+      readonly allocatable: storage.v1.VolumeNodeResources
+
+      /**
+       * This is the name of the CSI driver that this object refers to. This MUST be the same name
+       * returned by the CSI GetPluginName() call for that driver.
+       */
+      readonly name: string
+
+      /**
+       * nodeID of the node from the driver point of view. This field enables Kubernetes to
+       * communicate with storage systems that do not share the same nomenclature for nodes. For
+       * example, Kubernetes may refer to a given node as "node1", but the storage system may refer
+       * to the same node as "nodeA". When Kubernetes issues a command to the storage system to
+       * attach a volume to a specific node, it can use this field to refer to the node name using
+       * the ID that the storage system will understand, e.g. "nodeA" instead of "node1". This field
+       * is required.
+       */
+      readonly nodeID: string
+
+      /**
+       * topologyKeys is the list of keys supported by the driver. When a driver is initialized on a
+       * cluster, it provides a set of topology keys that it understands (e.g. "company.com/zone",
+       * "company.com/region"). When a driver is initialized on a node, it provides the same
+       * topology keys along with values. Kubelet will expose these topology keys as labels on its
+       * own node object. When Kubernetes does topology aware provisioning, it can use this list to
+       * determine which labels it should retrieve from the node object and pass back to the driver.
+       * It is possible for different nodes to use different topology keys. This can be empty if
+       * driver does not support topology.
+       */
+      readonly topologyKeys: string[]
+
+    }
+
+    /**
+     * CSINodeList is a collection of CSINode objects.
+     */
+    export interface CSINodeList {
+      /**
+       * APIVersion defines the versioned schema of this representation of an object. Servers should
+       * convert recognized schemas to the latest internal value, and may reject unrecognized
+       * values. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+       */
+      readonly apiVersion: "storage.k8s.io/v1"
+
+      /**
+       * items is the list of CSINode
+       */
+      readonly items: storage.v1.CSINode[]
+
+      /**
+       * Kind is a string value representing the REST resource this object represents. Servers may
+       * infer this from the endpoint the client submits requests to. Cannot be updated. In
+       * CamelCase. More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+       */
+      readonly kind: "CSINodeList"
+
+      /**
+       * Standard list metadata More info:
+       * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+       */
+      readonly metadata: meta.v1.ListMeta
+
+    }
+
+    /**
+     * CSINodeSpec holds information about the specification of all CSI drivers installed on a node
+     */
+    export interface CSINodeSpec {
+      /**
+       * drivers is a list of information of all CSI Drivers existing on a node. If all drivers in
+       * the list are uninstalled, this can become empty.
+       */
+      readonly drivers: storage.v1.CSINodeDriver[]
+
+    }
+
+    /**
      * StorageClass describes the parameters for a class of storage for which PersistentVolumes can
      * be dynamically provisioned.
      * 
@@ -22104,6 +19619,21 @@ export namespace storage {
        * Time the error was encountered.
        */
       readonly time: string
+
+    }
+
+    /**
+     * VolumeNodeResources is a set of resource limits for scheduling of volumes.
+     */
+    export interface VolumeNodeResources {
+      /**
+       * Maximum number of unique volumes managed by the CSI driver that can be used on a node. A
+       * volume that is both attached and mounted on a node is considered to be used once, not
+       * twice. The same rule applies for a unique volume that is shared among multiple pods on the
+       * same node. If this field is not specified, then the supported number of volumes on this
+       * node is unbounded.
+       */
+      readonly count: number
 
     }
 
@@ -22412,6 +19942,9 @@ export namespace storage {
     }
 
     /**
+     * @deprecated storage/v1beta1/CSINode is deprecated by storage/v1beta1/CSINode and not
+     * supported by Kubernetes v<nil>+ clusters.
+     * 
      * CSINode holds information about all CSI drivers installed on a node. CSI drivers do not need
      * to create the CSINode object directly. As long as they use the node-driver-registrar sidecar
      * container, the kubelet will automatically populate the CSINode object for the CSI driver as

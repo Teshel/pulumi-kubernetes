@@ -3,15 +3,5 @@
 # *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 # Export this package's modules as members:
-from .DaemonSet import (DaemonSet)
-from .DaemonSetList import (DaemonSetList)
-from .Deployment import (Deployment)
-from .DeploymentList import (DeploymentList)
 from .Ingress import (Ingress)
 from .IngressList import (IngressList)
-from .NetworkPolicy import (NetworkPolicy)
-from .NetworkPolicyList import (NetworkPolicyList)
-from .PodSecurityPolicy import (PodSecurityPolicy)
-from .PodSecurityPolicyList import (PodSecurityPolicyList)
-from .ReplicaSet import (ReplicaSet)
-from .ReplicaSetList import (ReplicaSetList)
