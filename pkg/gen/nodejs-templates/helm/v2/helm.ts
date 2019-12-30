@@ -206,7 +206,11 @@ export class Chart extends yaml.CollectionComponentResource {
                         maxBuffer: 512 * 1024 * 1024 // 512 MB
                     },
                 ).toString();
-                return this.parseTemplate(yamlStream, cfg.transformations, cfg.resourcePrefix, configDeps);
+                const transformations = [
+                    ...(cfg.transformations || []),
+                    addNamespaceTransform(cfg.namespace || "")
+                ];
+                return this.parseTemplate(yamlStream, transformations, cfg.resourcePrefix, configDeps);
             } catch (e) {
                 // Shed stack trace, only emit the error.
                 throw new pulumi.RunError(e.toString());
@@ -220,7 +224,7 @@ export class Chart extends yaml.CollectionComponentResource {
 
     parseTemplate(
         yamlStream: string,
-        transformations: ((o: any, opts: pulumi.CustomResourceOptions) => void)[] | undefined,
+        transformations: ((o: any, opts: pulumi.CustomResourceOptions) => void)[],
         resourcePrefix: string | undefined,
         dependsOn: pulumi.Resource[],
     ): pulumi.Output<{ [key: string]: pulumi.CustomResource }> {
@@ -241,10 +245,59 @@ export class Chart extends yaml.CollectionComponentResource {
             {
                 resourcePrefix: resourcePrefix,
                 yaml: objs.map(o => jsyaml.safeDump(o)),
-                transformations: transformations || [],
+                transformations: transformations,
             },
             { parent: this, dependsOn: dependsOn }
         );
+    }
+}
+
+function addNamespaceTransform(namespace: string) {
+    return function (obj: any, opts: pulumi.CustomResourceOptions) {
+        if (!obj) {
+            return
+        }
+        if (!namespace) {
+            return
+        }
+        if (
+            [
+                'Binding',
+                'ConfigMap',
+                'ControllerRevision',
+                'CronJob',
+                'DaemonSet',
+                'Deployment',
+                'Endpoint',
+                'Event',
+                'HorizontalPodAutoscaler',
+                'Ingress',
+                'Job',
+                'Lease',
+                'LimitRange',
+                'LocalSubjectAccessReview',
+                'NetworkPolicy',
+                'PersistentVolumeClaim',
+                'Pod',
+                'PodDisruptionBudget',
+                'PodTemplate',
+                'ReplicaSet',
+                'ReplicationController',
+                'ResourceQuota',
+                'Role',
+                'RoleBinding',
+                'Secret',
+                'ServiceAccount',
+                'Service',
+                'StatefulSet',
+            ].includes(obj.kind)
+        ) {
+            if (!obj.metadata) {
+                obj.metadata = { namespace };
+            } else if (!obj.metadata.namespace) {
+                obj.metadata.namespace = namespace;
+            }
+        }
     }
 }
 
