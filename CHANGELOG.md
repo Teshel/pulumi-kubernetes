@@ -1,5 +1,9 @@
 ## HEAD (Unreleased)
 
+### Improvements
+
+-   Improve handling of default namespaces for Helm charts. (https://github.com/pulumi/pulumi-kubernetes/pull/934).
+
 ### Bug fixes
 
 -   Fix panic condition in Ingress await logic. (https://github.com/pulumi/pulumi-kubernetes/pull/928).
